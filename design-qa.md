@@ -10,4 +10,9 @@
 - Work typography and motion: Pretendard Variable uses the reference page's responsive size range; the 48px accent pointer locally separates nearby characters and resets on pointer exit. Touch and reduced-motion users receive the static layout.
 - Code checks: `node --check script.js` and `node --check work/work.js` pass.
 
-final result: passed
+final result: passed after desktop interaction correction
+
+- Work index uses the bundled Pretendard Variable face and the reference scale, weight, tracking and line height.
+- Hovered rows preserve their original column widths while a measured character layer moves away from the pointer.
+- The homepage information card remains fixed to viewport coordinates and updates on every pointer move.
+- Touch and reduced-motion layouts keep stable text instead of the character effect.

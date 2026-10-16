@@ -20,7 +20,23 @@ const categories = ["Art", "Design", "Research"];
 let activeFilter = "All";
 let activeProject = workProjects[0];
 
-const waveText = text => `<span class="wave-text" aria-hidden="true">${[...text].map(char => `<span class="pointer-char">${char === " " ? "&nbsp;" : char}</span>`).join("")}</span>`;
+const escapeText = text => text.replace(/[&<>"']/g, char => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char]));
+const waveText = text => `<span class="pointer-title"><span class="pointer-title__base">${escapeText(text)}</span><span class="pointer-title__wave" aria-hidden="true">${[...text].map(char => `<span class="pointer-title__char">${char === " " ? "&nbsp;" : escapeText(char)}</span>`).join("")}</span></span>`;
+
+const measureWaveText = row => {
+  row.querySelectorAll(".pointer-title").forEach(title => {
+    const base = title.querySelector(".pointer-title__base");
+    const style = getComputedStyle(base);
+    const context = document.createElement("canvas").getContext("2d");
+    context.font = style.font;
+    const tracking = Number.parseFloat(style.letterSpacing) || 0;
+    let left = 0;
+    title.querySelectorAll(".pointer-title__char").forEach(char => {
+      char.style.left = `${left}px`;
+      left += context.measureText(char.textContent).width + tracking;
+    });
+  });
+};
 
 const updatePreview = (project) => {
   activeProject = project;
@@ -72,7 +88,12 @@ const renderRows = () => {
     row.setAttribute("aria-label", `${project.title}, ${project.format}, ${project.focus}, ${project.year}`);
     const dots = project.categories.map(category => `<span class="category-dot category-dot--${category.toLowerCase()}" aria-hidden="true"></span>`).join("");
     row.innerHTML = `<span class="work-cell work-title">${waveText(project.title)}</span><span class="work-cell work-format">${waveText(project.format)}<span class="category-dots" aria-hidden="true">${dots}</span></span><span class="work-cell work-focus">${waveText(project.focus)}</span><span class="work-cell work-year">${project.year}</span>`;
-    row.addEventListener("pointerenter", () => updatePreview(project));
+    row.addEventListener("pointerenter", () => {
+      updatePreview(project);
+      measureWaveText(row);
+      row.classList.add("is-waving");
+    });
+    row.addEventListener("pointerleave", () => row.classList.remove("is-waving"));
     row.addEventListener("focus", () => updatePreview(project));
     table.append(row);
   });
@@ -87,15 +108,16 @@ if (matchMedia("(hover:hover) and (pointer:fine)").matches) {
   table.addEventListener("pointermove", event => {
     const row = event.target.closest(".work-row");
     if (!row) return;
-    row.querySelectorAll(".pointer-char").forEach(char => {
-      const center = char.getBoundingClientRect().left + char.getBoundingClientRect().width / 2;
+    row.querySelectorAll(".pointer-title__char").forEach(char => {
+      const rect = char.getBoundingClientRect();
+      const center = rect.left + rect.width / 2;
       const distance = center - event.clientX;
-      const force = Math.max(0, 72 - Math.abs(distance)) / 72;
-      char.style.setProperty("--push", `${Math.sign(distance || 1) * force * 16}px`);
+      const force = Math.max(0, 76 - Math.abs(distance)) / 76;
+      char.style.setProperty("--glyph-x", `${Math.sign(distance || 1) * force * 22}px`);
     });
   });
   table.addEventListener("pointerout", event => {
     const row = event.target.closest(".work-row");
-    if (row && !row.contains(event.relatedTarget)) row.querySelectorAll(".pointer-char").forEach(char => char.style.removeProperty("--push"));
+    if (row && !row.contains(event.relatedTarget)) row.querySelectorAll(".pointer-title__char").forEach(char => char.style.removeProperty("--glyph-x"));
   });
 }
