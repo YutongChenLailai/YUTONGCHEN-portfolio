@@ -7,6 +7,7 @@
 - Home interaction: project information follows the pointer and stays within the viewport; keyboard focus positions the information card accessibly.
 - Mobile at 390 × 844: filters remain usable, project preview and list stack vertically, and the page has no horizontal overflow.
 - Interaction checks: category filters update the list; hovering a project updates the preview; project images load.
+- Work typography and motion: Pretendard Variable uses the reference page's responsive size range; the 48px accent pointer locally separates nearby characters and resets on pointer exit. Touch and reduced-motion users receive the static layout.
 - Code checks: `node --check script.js` and `node --check work/work.js` pass.
 
 final result: passed

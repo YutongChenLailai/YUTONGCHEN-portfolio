@@ -20,6 +20,8 @@ const categories = ["Art", "Design", "Research"];
 let activeFilter = "All";
 let activeProject = workProjects[0];
 
+const waveText = text => `<span class="wave-text" aria-hidden="true">${[...text].map(char => `<span class="pointer-char">${char === " " ? "&nbsp;" : char}</span>`).join("")}</span>`;
+
 const updatePreview = (project) => {
   activeProject = project;
   preview.image.classList.add("is-loading");
@@ -69,7 +71,7 @@ const renderRows = () => {
     row.setAttribute("role", "listitem");
     row.setAttribute("aria-label", `${project.title}, ${project.format}, ${project.focus}, ${project.year}`);
     const dots = project.categories.map(category => `<span class="category-dot category-dot--${category.toLowerCase()}" aria-hidden="true"></span>`).join("");
-    row.innerHTML = `<span class="work-cell work-title">${project.title}</span><span class="work-cell work-format">${project.format}<span class="category-dots" aria-hidden="true">${dots}</span></span><span class="work-cell work-focus">${project.focus}</span><span class="work-cell work-year">${project.year}</span>`;
+    row.innerHTML = `<span class="work-cell work-title">${waveText(project.title)}</span><span class="work-cell work-format">${waveText(project.format)}<span class="category-dots" aria-hidden="true">${dots}</span></span><span class="work-cell work-focus">${waveText(project.focus)}</span><span class="work-cell work-year">${project.year}</span>`;
     row.addEventListener("pointerenter", () => updatePreview(project));
     row.addEventListener("focus", () => updatePreview(project));
     table.append(row);
@@ -80,3 +82,20 @@ const renderRows = () => {
 
 renderFilters();
 renderRows();
+
+if (matchMedia("(hover:hover) and (pointer:fine)").matches) {
+  table.addEventListener("pointermove", event => {
+    const row = event.target.closest(".work-row");
+    if (!row) return;
+    row.querySelectorAll(".pointer-char").forEach(char => {
+      const center = char.getBoundingClientRect().left + char.getBoundingClientRect().width / 2;
+      const distance = center - event.clientX;
+      const force = Math.max(0, 72 - Math.abs(distance)) / 72;
+      char.style.setProperty("--push", `${Math.sign(distance || 1) * force * 16}px`);
+    });
+  });
+  table.addEventListener("pointerout", event => {
+    const row = event.target.closest(".work-row");
+    if (row && !row.contains(event.relatedTarget)) row.querySelectorAll(".pointer-char").forEach(char => char.style.removeProperty("--push"));
+  });
+}
