@@ -14,6 +14,7 @@ final result: passed after desktop interaction correction
 
 - Work index uses the bundled Pretendard Variable face and the reference scale, weight, tracking and line height.
 - Hovered rows preserve their original column widths while a measured character layer moves away from the pointer.
+- Truncated catalogue copy keeps its original character spacing; off-screen glyphs do not animate and the visible tail fades at the text boundary.
 - The homepage information card remains fixed to viewport coordinates and updates on every pointer move.
 - Touch and reduced-motion layouts keep stable text instead of the character effect.
 - Automated viewport checks passed at 1952, 1440, 1024, 761, 760 and 430px with zero horizontal overflow.

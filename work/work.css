@@ -27,7 +27,8 @@
 .work-year { color: #111; text-align: right; font-variant-numeric: tabular-nums; }
 .work-year .pointer-title { text-align: right; }
 .pointer-title { position: relative; display: block; min-width: 0; overflow: hidden; }
-.pointer-title__base { display: block; overflow: hidden; text-overflow: ellipsis; }
+.pointer-title.is-truncated { -webkit-mask-image: linear-gradient(to right,#000 calc(100% - 20px),transparent); mask-image: linear-gradient(to right,#000 calc(100% - 20px),transparent); }
+.pointer-title__base { display: block; overflow: hidden; text-overflow: clip; }
 .work-format .pointer-title { flex: 1 1 auto; }
 .pointer-title__wave { position: absolute; z-index: 31; inset: 0; visibility: hidden; pointer-events: none; }
 .pointer-title__char { position: absolute; top: 0; white-space: pre; transform: translateX(var(--glyph-x,0)); transition: transform 120ms cubic-bezier(.22,.61,.36,1); }

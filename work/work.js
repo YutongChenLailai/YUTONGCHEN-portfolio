@@ -30,11 +30,13 @@ const measureWaveText = row => {
     const text = base.firstChild;
     const origin = title.getBoundingClientRect();
     const range = document.createRange();
+    title.classList.toggle("is-truncated", base.scrollWidth > title.clientWidth + 1);
     title.querySelectorAll(".pointer-title__char").forEach(char => {
       const start = Number(char.dataset.start);
       range.setStart(text, start);
       range.setEnd(text, start + Number(char.dataset.length));
       const rect = range.getBoundingClientRect();
+      char.hidden = rect.left >= origin.right;
       char.style.left = `${rect.left - origin.left}px`;
       char.dataset.left = rect.left;
       char.dataset.right = rect.right;
@@ -123,8 +125,10 @@ if (matchMedia("(min-width:761px) and (hover:hover) and (pointer:fine) and (pref
     const field = event.target.closest(".work-cell");
     row.querySelectorAll(".pointer-title__char").forEach(char => char.style.setProperty("--glyph-x", "0px"));
     if (!field) return;
-    const chars = [...field.querySelectorAll(".pointer-title__char")];
-    const fieldRect = field.getBoundingClientRect();
+    const title = field.querySelector(".pointer-title");
+    const chars = [...field.querySelectorAll(".pointer-title__char:not([hidden])")];
+    const fieldRect = title?.getBoundingClientRect();
+    if (!fieldRect || !chars.length) return;
     const gap = Math.max(23, parseFloat(getComputedStyle(field).fontSize) * .675);
     const left = chars.filter(char => (Number(char.dataset.left) + Number(char.dataset.right)) / 2 < event.clientX);
     const right = chars.filter(char => !left.includes(char));
