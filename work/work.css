@@ -9,11 +9,11 @@
 .work-filter { display: inline-flex; align-items: baseline; gap: 7px; padding: 0; border: 0; background: transparent; color: #111; font: inherit; font-size: 16px; line-height: 1.2; letter-spacing: -.02em; cursor: pointer; }
 .work-filter[aria-pressed="true"] { text-decoration: underline; text-underline-offset: 3px; }
 .work-filter-count { font-size: 11px; vertical-align: super; }
-.filter-dot, .category-dot { display: inline-block; width: 6px; height: 6px; flex: 0 0 6px; border-radius: 50%; background: currentColor; }
-.filter-dot--art, .category-dot--art { color: #575fe0; }
-.filter-dot--design, .category-dot--design { color: #eb705d; }
-.filter-dot--research, .category-dot--research { color: #54a384; }
-.work-table-head, .work-row { display: grid; grid-template-columns: minmax(0,1.45fr) minmax(0,.95fr) minmax(0,1fr) 52px; column-gap: 18px; align-items: center; }
+.filter-dot { display: inline-block; width: 6px; height: 6px; flex: 0 0 6px; border-radius: 50%; background: currentColor; }
+.filter-dot--art { color: #575fe0; }
+.filter-dot--design { color: #eb705d; }
+.filter-dot--research { color: #54a384; }
+.work-table-head, .work-row { display: grid; grid-template-columns: minmax(0,1.65fr) minmax(150px,.75fr) 64px; column-gap: 18px; align-items: center; }
 .work-table-head { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
 .work-row { min-height: 1.75em; border-bottom: 1px solid #d8d8d8; color: #111; font-size: clamp(18px,1.5vw,26px); letter-spacing: -.025em; }
 .work-row[hidden] { display: none; }
@@ -22,8 +22,6 @@
 .work-cell { min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 .work-title { font-weight: 400; }
 .work-format { display: flex; align-items: center; gap: 8px; font-size: inherit; }
-.category-dots { display: inline-flex; align-items: center; gap: 5px; flex: 0 0 auto; }
-.work-focus { color: #111; font-size: inherit; }
 .work-year { color: #111; text-align: right; font-variant-numeric: tabular-nums; }
 .work-year .pointer-title { text-align: right; }
 .pointer-title { position: relative; display: block; min-width: 0; overflow: hidden; }
@@ -61,7 +59,6 @@
   .work-row.is-waving .pointer-title__base { visibility: visible; }
   .work-title { grid-column: 1; grid-row: 1; }
   .work-format { grid-column: 1; grid-row: 2; font-size: 14px; }
-  .work-focus { display: none; }
   .work-year { grid-column: 2; grid-row: 1 / 3; align-self: center; font-size: 14px; }
   .work-page .site-header a { font-size: 16px; }
   .work-pointer { display: none; }

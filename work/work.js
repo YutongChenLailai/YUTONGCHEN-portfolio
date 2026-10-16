@@ -1,5 +1,18 @@
+const projectKeywords = {
+  "poopslaves": "Speculation",
+  "value-machine": "Authorship",
+  "plantievers-illusion": "Memory",
+  "fetorium": "Olfaction",
+  "plated-fantasies": "Perception",
+  "closet-x": "AI",
+  "navigating-the-past": "AR",
+  "vivid": "Co-creation",
+  "feeding-fear": "Fear",
+  "drown-in-algae": "Ecology",
+  "forbidden-hue": "Heritage"
+};
 const workProjects = window.portfolioProjects.map(([title, slug, description, format, year, focus, categories]) => ({
-  title, slug, description, format, year, focus, categories,
+  title, slug, description, format, year, focus, categories, keyword: projectKeywords[slug],
   image: `../assets/projects/${slug}.${slug === "closet-x" || slug === "drown-in-algae" ? "jpg" : "webp"}`,
   url: `https://yutongchenlailai.github.io/yutong-portfolio/#project/${slug}`
 }));
@@ -91,9 +104,8 @@ const renderRows = () => {
     row.className = "work-row";
     row.href = project.url;
     row.setAttribute("role", "listitem");
-    row.setAttribute("aria-label", `${project.title}, ${project.format}, ${project.focus}, ${project.year}`);
-    const dots = project.categories.map(category => `<span class="category-dot category-dot--${category.toLowerCase()}" aria-hidden="true"></span>`).join("");
-    row.innerHTML = `<span class="work-cell work-title">${waveText(project.title)}</span><span class="work-cell work-format">${waveText(project.format)}<span class="category-dots" aria-hidden="true">${dots}</span></span><span class="work-cell work-focus">${waveText(project.focus)}</span><span class="work-cell work-year">${waveText(project.year)}</span>`;
+    row.setAttribute("aria-label", `${project.title}, ${project.keyword}, ${project.year}`);
+    row.innerHTML = `<span class="work-cell work-title">${waveText(project.title)}</span><span class="work-cell work-format">${waveText(project.keyword)}</span><span class="work-cell work-year">${waveText(project.year)}</span>`;
     row.addEventListener("pointerenter", () => {
       updatePreview(project);
       measureWaveText(row);
