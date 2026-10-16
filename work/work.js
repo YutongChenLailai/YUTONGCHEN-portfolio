@@ -21,19 +21,23 @@ let activeFilter = "All";
 let activeProject = workProjects[0];
 
 const escapeText = text => text.replace(/[&<>"']/g, char => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char]));
-const waveText = text => `<span class="pointer-title"><span class="pointer-title__base">${escapeText(text)}</span><span class="pointer-title__wave" aria-hidden="true">${[...text].map(char => `<span class="pointer-title__char">${char === " " ? "&nbsp;" : escapeText(char)}</span>`).join("")}</span></span>`;
+const segmentText = text => Intl.Segmenter ? [...new Intl.Segmenter("en", {granularity:"grapheme"}).segment(text)] : [...text].map((segment, index) => ({segment, index}));
+const waveText = text => `<span class="pointer-title"><span class="pointer-title__base">${escapeText(text)}</span><span class="pointer-title__wave" aria-hidden="true">${segmentText(text).filter(({segment}) => !/\s/.test(segment)).map(({segment, index}) => `<span class="pointer-title__char" data-start="${index}" data-length="${segment.length}">${escapeText(segment)}</span>`).join("")}</span></span>`;
 
 const measureWaveText = row => {
   row.querySelectorAll(".pointer-title").forEach(title => {
     const base = title.querySelector(".pointer-title__base");
-    const style = getComputedStyle(base);
-    const context = document.createElement("canvas").getContext("2d");
-    context.font = style.font;
-    const tracking = Number.parseFloat(style.letterSpacing) || 0;
-    let left = 0;
+    const text = base.firstChild;
+    const origin = title.getBoundingClientRect();
+    const range = document.createRange();
     title.querySelectorAll(".pointer-title__char").forEach(char => {
-      char.style.left = `${left}px`;
-      left += context.measureText(char.textContent).width + tracking;
+      const start = Number(char.dataset.start);
+      range.setStart(text, start);
+      range.setEnd(text, start + Number(char.dataset.length));
+      const rect = range.getBoundingClientRect();
+      char.style.left = `${rect.left - origin.left}px`;
+      char.dataset.left = rect.left;
+      char.dataset.right = rect.right;
     });
   });
 };
@@ -87,7 +91,7 @@ const renderRows = () => {
     row.setAttribute("role", "listitem");
     row.setAttribute("aria-label", `${project.title}, ${project.format}, ${project.focus}, ${project.year}`);
     const dots = project.categories.map(category => `<span class="category-dot category-dot--${category.toLowerCase()}" aria-hidden="true"></span>`).join("");
-    row.innerHTML = `<span class="work-cell work-title">${waveText(project.title)}</span><span class="work-cell work-format">${waveText(project.format)}<span class="category-dots" aria-hidden="true">${dots}</span></span><span class="work-cell work-focus">${waveText(project.focus)}</span><span class="work-cell work-year">${project.year}</span>`;
+    row.innerHTML = `<span class="work-cell work-title">${waveText(project.title)}</span><span class="work-cell work-format">${waveText(project.format)}<span class="category-dots" aria-hidden="true">${dots}</span></span><span class="work-cell work-focus">${waveText(project.focus)}</span><span class="work-cell work-year">${waveText(project.year)}</span>`;
     row.addEventListener("pointerenter", () => {
       updatePreview(project);
       measureWaveText(row);
@@ -104,20 +108,39 @@ const renderRows = () => {
 renderFilters();
 renderRows();
 
-if (matchMedia("(hover:hover) and (pointer:fine)").matches) {
+if (matchMedia("(min-width:761px) and (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference)").matches) {
+  const marker = document.createElement("span");
+  marker.className = "work-pointer";
+  marker.setAttribute("aria-hidden", "true");
+  document.body.append(marker);
+
   table.addEventListener("pointermove", event => {
     const row = event.target.closest(".work-row");
     if (!row) return;
-    row.querySelectorAll(".pointer-title__char").forEach(char => {
-      const rect = char.getBoundingClientRect();
-      const center = rect.left + rect.width / 2;
-      const distance = center - event.clientX;
-      const force = Math.max(0, 76 - Math.abs(distance)) / 76;
-      char.style.setProperty("--glyph-x", `${Math.sign(distance || 1) * force * 22}px`);
-    });
+    marker.classList.add("is-visible");
+    marker.style.setProperty("--pointer-x", `${event.clientX}px`);
+    marker.style.setProperty("--pointer-y", `${event.clientY}px`);
+    const field = event.target.closest(".work-cell");
+    row.querySelectorAll(".pointer-title__char").forEach(char => char.style.setProperty("--glyph-x", "0px"));
+    if (!field) return;
+    const chars = [...field.querySelectorAll(".pointer-title__char")];
+    const fieldRect = field.getBoundingClientRect();
+    const gap = Math.max(23, parseFloat(getComputedStyle(field).fontSize) * .675);
+    const left = chars.filter(char => (Number(char.dataset.left) + Number(char.dataset.right)) / 2 < event.clientX);
+    const right = chars.filter(char => !left.includes(char));
+    const leftLimit = left.length ? Math.max(0, Number(left[0].dataset.left) - fieldRect.left) : 0;
+    const rightLimit = right.length ? Math.max(0, fieldRect.right - Number(right.at(-1).dataset.right)) : 0;
+    const leftShift = Math.min(32, leftLimit, Math.max(0, ...left.map(char => Number(char.dataset.right) - (event.clientX - gap))));
+    const rightShift = Math.min(32, rightLimit, Math.max(0, ...right.map(char => event.clientX + gap - Number(char.dataset.left))));
+    left.forEach(char => char.style.setProperty("--glyph-x", `${-leftShift}px`));
+    right.forEach(char => char.style.setProperty("--glyph-x", `${rightShift}px`));
   });
   table.addEventListener("pointerout", event => {
     const row = event.target.closest(".work-row");
-    if (row && !row.contains(event.relatedTarget)) row.querySelectorAll(".pointer-title__char").forEach(char => char.style.removeProperty("--glyph-x"));
+    if (row && !row.contains(event.relatedTarget)) {
+      marker.classList.remove("is-visible");
+      row.querySelectorAll(".pointer-title__char").forEach(char => char.style.removeProperty("--glyph-x"));
+    }
   });
+  table.addEventListener("pointerleave", () => marker.classList.remove("is-visible"));
 }

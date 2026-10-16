@@ -7,7 +7,7 @@
 - Home interaction: project information follows the pointer and stays within the viewport; keyboard focus positions the information card accessibly.
 - Mobile at 390 × 844: filters remain usable, project preview and list stack vertically, and the page has no horizontal overflow.
 - Interaction checks: category filters update the list; hovering a project updates the preview; project images load.
-- Work typography and motion: Pretendard Variable uses the reference page's responsive size range; the 48px accent pointer locally separates nearby characters and resets on pointer exit. Touch and reduced-motion users receive the static layout.
+- Work typography and motion: all three catalogue text columns use Pretendard Variable at `clamp(18px, 1.5vw, 26px)`, weight 400, tracking `-.025em`, and line-height 1.2. The 42px `#ffff18` pointer opens a bounded gap without changing the spacing inside either text group. Touch and reduced-motion users receive the static layout.
 - Code checks: `node --check script.js` and `node --check work/work.js` pass.
 
 final result: passed after desktop interaction correction
@@ -16,3 +16,4 @@ final result: passed after desktop interaction correction
 - Hovered rows preserve their original column widths while a measured character layer moves away from the pointer.
 - The homepage information card remains fixed to viewport coordinates and updates on every pointer move.
 - Touch and reduced-motion layouts keep stable text instead of the character effect.
+- Automated viewport checks passed at 1952, 1440, 1024, 761, 760 and 430px with zero horizontal overflow.
