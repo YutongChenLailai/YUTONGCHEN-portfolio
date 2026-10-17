@@ -29,9 +29,11 @@
 .pointer-title__base { display: block; overflow: hidden; text-overflow: clip; }
 .work-format .pointer-title { flex: 1 1 auto; }
 .pointer-title__wave { position: absolute; z-index: 31; inset: 0; visibility: hidden; pointer-events: none; }
-.pointer-title__char { position: absolute; top: 0; white-space: pre; transform: translateX(var(--glyph-x,0)); transition: transform 120ms cubic-bezier(.22,.61,.36,1); }
+.pointer-title__char { position: absolute; top: 0; white-space: pre; transform: translateX(var(--glyph-x,0)); will-change: transform; }
 .work-row.is-waving .pointer-title__base { visibility: hidden; }
 .work-row.is-waving .pointer-title__wave { visibility: visible; }
+.work-row.is-waving { position: relative; z-index: 2; }
+.work-row.is-waving .work-cell, .work-row.is-waving .pointer-title { overflow: visible; }
 .project-preview { position: sticky; grid-column: 2; grid-row: 1 / 3; align-self: start; top: calc(var(--header) + 95px); margin-top: 57px; min-width: 0; }
 .project-preview-image { display: block; overflow: hidden; aspect-ratio: 16 / 9; background: #e8e8e8; }
 .project-preview-image img { display: block; width: 100%; height: 100%; object-fit: cover; transition: opacity 180ms ease; }
@@ -55,13 +57,10 @@
   .project-preview-meta { display: flex; flex-wrap: wrap; gap: 5px 14px; font-size: 13px; }
   .preview-more { margin-top: 12px; font-size: 14px; }
   .work-row { grid-template-columns: minmax(0,1fr) 48px; grid-template-rows: auto auto; min-height: 68px; column-gap: 12px; row-gap: 3px; padding-block: 10px; font-size: 18px; }
-  .pointer-title__wave { display: none; }
-  .work-row.is-waving .pointer-title__base { visibility: visible; }
   .work-title { grid-column: 1; grid-row: 1; }
   .work-format { grid-column: 1; grid-row: 2; font-size: 14px; }
   .work-year { grid-column: 2; grid-row: 1 / 3; align-self: center; font-size: 14px; }
   .work-page .site-header a { font-size: 16px; }
-  .work-pointer { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   .pointer-title__char { transform: none !important; }

@@ -106,12 +106,7 @@ const renderRows = () => {
     row.setAttribute("role", "listitem");
     row.setAttribute("aria-label", `${project.title}, ${project.keyword}, ${project.year}`);
     row.innerHTML = `<span class="work-cell work-title">${waveText(project.title)}</span><span class="work-cell work-format">${waveText(project.keyword)}</span><span class="work-cell work-year">${waveText(project.year)}</span>`;
-    row.addEventListener("pointerenter", () => {
-      updatePreview(project);
-      measureWaveText(row);
-      row.classList.add("is-waving");
-    });
-    row.addEventListener("pointerleave", () => row.classList.remove("is-waving"));
+    row.addEventListener("pointerenter", () => updatePreview(project));
     row.addEventListener("focus", () => updatePreview(project));
     table.append(row);
   });
@@ -122,41 +117,110 @@ const renderRows = () => {
 renderFilters();
 renderRows();
 
-if (matchMedia("(min-width:761px) and (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference)").matches) {
+if (matchMedia("(prefers-reduced-motion:no-preference)").matches) {
   const marker = document.createElement("span");
   marker.className = "work-pointer";
   marker.setAttribute("aria-hidden", "true");
   document.body.append(marker);
 
-  table.addEventListener("pointermove", event => {
-    const row = event.target.closest(".work-row");
-    if (!row) return;
-    marker.classList.add("is-visible");
-    marker.style.setProperty("--pointer-x", `${event.clientX}px`);
-    marker.style.setProperty("--pointer-y", `${event.clientY}px`);
-    const field = event.target.closest(".work-cell");
-    row.querySelectorAll(".pointer-title__char").forEach(char => char.style.setProperty("--glyph-x", "0px"));
-    if (!field) return;
-    const title = field.querySelector(".pointer-title");
-    const chars = [...field.querySelectorAll(".pointer-title__char:not([hidden])")];
-    const fieldRect = title?.getBoundingClientRect();
-    if (!fieldRect || !chars.length) return;
-    const gap = Math.max(23, parseFloat(getComputedStyle(field).fontSize) * .675);
-    const left = chars.filter(char => (Number(char.dataset.left) + Number(char.dataset.right)) / 2 < event.clientX);
-    const right = chars.filter(char => !left.includes(char));
-    const leftLimit = left.length ? Math.max(0, Number(left[0].dataset.left) - fieldRect.left) : 0;
-    const rightLimit = right.length ? Math.max(0, fieldRect.right - Number(right.at(-1).dataset.right)) : 0;
-    const leftShift = Math.min(32, leftLimit, Math.max(0, ...left.map(char => Number(char.dataset.right) - (event.clientX - gap))));
-    const rightShift = Math.min(32, rightLimit, Math.max(0, ...right.map(char => event.clientX + gap - Number(char.dataset.left))));
-    left.forEach(char => char.style.setProperty("--glyph-x", `${-leftShift}px`));
-    right.forEach(char => char.style.setProperty("--glyph-x", `${rightShift}px`));
-  });
-  table.addEventListener("pointerout", event => {
-    const row = event.target.closest(".work-row");
-    if (row && !row.contains(event.relatedTarget)) {
-      marker.classList.remove("is-visible");
-      row.querySelectorAll(".pointer-title__char").forEach(char => char.style.removeProperty("--glyph-x"));
+  const rowsInMotion = new Set();
+  const offsets = new WeakMap();
+  let pointer = null;
+  let frame = 0;
+
+  const scheduleWave = () => {
+    if (!frame) frame = requestAnimationFrame(animateWave);
+  };
+
+  const animateWave = () => {
+    frame = 0;
+    rowsInMotion.forEach(row => row.querySelectorAll(".pointer-title__char").forEach(char => {
+      const state = offsets.get(char) || {value:0, target:0};
+      state.target = 0;
+      offsets.set(char, state);
+    }));
+
+    if (pointer) {
+      const title = pointer.field.querySelector(".pointer-title");
+      const chars = [...pointer.field.querySelectorAll(".pointer-title__char:not([hidden])")];
+      const fieldRect = title?.getBoundingClientRect();
+      if (fieldRect && chars.length) {
+        const gap = Math.max(23, parseFloat(getComputedStyle(pointer.field).fontSize) * .675);
+        const left = chars.filter(char => (Number(char.dataset.left) + Number(char.dataset.right)) / 2 < pointer.x);
+        const right = chars.filter(char => !left.includes(char));
+        const fields = [...pointer.row.querySelectorAll(".work-cell")];
+        const fieldIndex = fields.indexOf(pointer.field);
+        const previous = fields[fieldIndex - 1]?.getBoundingClientRect();
+        const next = fields[fieldIndex + 1]?.getBoundingClientRect();
+        const leftRoom = left.length ? Number(left[0].dataset.left) - fieldRect.left + (previous ? fieldRect.left - previous.right - 2 : fieldRect.left) : 0;
+        const rightRoom = right.length ? fieldRect.right - Number(right.at(-1).dataset.right) + (next ? next.left - fieldRect.right - 2 : 16) : 0;
+        const leftShift = Math.min(24, Math.max(0, leftRoom), Math.max(0, ...left.map(char => Number(char.dataset.right) - (pointer.x - gap))));
+        const rightShift = Math.min(24, Math.max(0, rightRoom), Math.max(0, ...right.map(char => pointer.x + gap - Number(char.dataset.left))));
+        left.forEach(char => offsets.get(char).target = -leftShift);
+        right.forEach(char => offsets.get(char).target = rightShift);
+      }
     }
+
+    let moving = false;
+    rowsInMotion.forEach(row => {
+      if (!row.isConnected) return rowsInMotion.delete(row);
+      let rowMoving = false;
+      row.querySelectorAll(".pointer-title__char").forEach(char => {
+        const state = offsets.get(char);
+        const delta = state.target - state.value;
+        state.value = Math.abs(delta) < .05 ? state.target : state.value + delta * .22;
+        char.style.setProperty("--glyph-x", `${state.value.toFixed(2)}px`);
+        if (Math.abs(state.target - state.value) >= .05) moving = rowMoving = true;
+      });
+      if ((!pointer || pointer.row !== row) && !rowMoving && [...row.querySelectorAll(".pointer-title__char")].every(char => Math.abs(offsets.get(char).value) < .05)) {
+        row.classList.remove("is-waving");
+        rowsInMotion.delete(row);
+      }
+    });
+    if (moving) frame = requestAnimationFrame(animateWave);
+  };
+
+  const updatePointer = (x, y, target) => {
+    const row = target?.closest(".work-row");
+    if (!row) {
+      pointer = null;
+      marker.classList.remove("is-visible");
+      return scheduleWave();
+    }
+    marker.classList.add("is-visible");
+    marker.style.setProperty("--pointer-x", `${x}px`);
+    marker.style.setProperty("--pointer-y", `${y}px`);
+    const field = target.closest(".work-cell");
+    if (!rowsInMotion.has(row)) {
+      measureWaveText(row);
+      row.classList.add("is-waving");
+      rowsInMotion.add(row);
+      row.querySelectorAll(".pointer-title__char").forEach(char => offsets.set(char, {value:0, target:0}));
+    }
+    pointer = field ? {row, field, x:Math.round(x)} : null;
+    scheduleWave();
+  };
+
+  const releasePointer = () => {
+    pointer = null;
+    marker.classList.remove("is-visible");
+    scheduleWave();
+  };
+
+  table.addEventListener("pointermove", event => {
+    if (event.pointerType !== "touch") updatePointer(event.clientX, event.clientY, event.target);
   });
-  table.addEventListener("pointerleave", () => marker.classList.remove("is-visible"));
+  table.addEventListener("touchstart", event => {
+    const touch = event.touches[0];
+    if (touch) updatePointer(touch.clientX, touch.clientY, document.elementFromPoint(touch.clientX, touch.clientY));
+  }, {passive:true});
+  table.addEventListener("touchmove", event => {
+    const touch = event.touches[0];
+    if (touch) updatePointer(touch.clientX, touch.clientY, document.elementFromPoint(touch.clientX, touch.clientY));
+  }, {passive:true});
+  table.addEventListener("touchend", releasePointer, {passive:true});
+  table.addEventListener("touchcancel", releasePointer, {passive:true});
+  table.addEventListener("pointerleave", event => {
+    if (event.pointerType !== "touch") releasePointer();
+  });
 }
