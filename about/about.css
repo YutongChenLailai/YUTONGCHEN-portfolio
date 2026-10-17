@@ -1,5 +1,5 @@
 .about-body { font-size: 18px; }
-.about-page { --about-edge: clamp(12px,1.5625vw,20px); width: calc(100% - 2 * var(--about-edge)); margin: 0 var(--about-edge); padding: clamp(20px,1.6vw,32px) 0 56px; font-size: 18px; font-weight: 350; line-height: 1.2; letter-spacing: -.015em; }
+.about-page { --about-edge: clamp(12px,1.5625vw,20px); width: calc(100% - 2 * var(--about-edge)); max-width: 1240px; margin: 0 auto; padding: clamp(20px,1.6vw,32px) 0 56px; font-size: 18px; font-weight: 350; line-height: 1.2; letter-spacing: -.015em; }
 .about-page p, .about-page h1, .about-page h2, .about-page dl { margin: 0; }
 .about-page strong { font-weight: 600; }
 .about-page a { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .15em; }

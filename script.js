@@ -1,4 +1,4 @@
-const detailBase = "https://yutongchenlailai.github.io/yutong-portfolio/#project/";
+const detailBase = "project/?id=";
 const projects = [
   ["PoopSlaves", "poopslaves", "Speculative VR system.", "VR · interaction · research", "2025", "Speculative systems", ["Design", "Research"]],
   ["Value Machine", "value-machine", "Participatory art-market critique.", "installation · authorship · participation", "2025", "Authorship · cultural value", ["Art", "Design"]],

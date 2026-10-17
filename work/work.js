@@ -14,7 +14,7 @@ const projectKeywords = {
 const workProjects = window.portfolioProjects.map(([title, slug, description, format, year, focus, categories]) => ({
   title, slug, description, format, year, focus, categories, keyword: projectKeywords[slug],
   image: `../assets/projects/${slug}.${slug === "closet-x" || slug === "drown-in-algae" ? "jpg" : "webp"}`,
-  url: `https://yutongchenlailai.github.io/yutong-portfolio/#project/${slug}`
+  url: `../project/?id=${slug}`
 }));
 const filters = document.querySelector("#work-filters");
 const table = document.querySelector("#work-table");
