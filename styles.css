@@ -38,8 +38,9 @@ footer { min-height: 120px; padding: 20px var(--edge); display: flex; justify-co
 .cursor { position: fixed; z-index: 100; top: 0; left: 0; width: 9px; height: 9px; margin: -4px 0 0 -4px; border-radius: 50%; background: #111; opacity: 0; pointer-events: none; transition: opacity 80ms linear; }
 .cursor span { display: none; }
 .cursor.show { opacity: 1; }
+.cursor.is-action { width: 42px; height: 42px; margin: -21px 0 0 -21px; background: #ffff18; }
 :focus-visible { outline: 2px solid #111; outline-offset: 2px; }
-@media (pointer: fine) { html, body, body * { cursor: none !important; } }
+html, body, body * { cursor: none !important; }
 @media (max-width: 700px) {
   :root { --edge: 8px; --gap: 6px; --header: 44px; }
   body { font-size: 12px; }
