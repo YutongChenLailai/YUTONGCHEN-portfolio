@@ -72,9 +72,9 @@ if (grid) {
 
 const cursor = document.querySelector(".cursor");
 if (matchMedia("(pointer:fine)").matches) {
-  addEventListener("pointermove", event => cursor.style.transform = `translate3d(${event.clientX}px,${event.clientY}px,0)`);
-  document.querySelectorAll("a").forEach(link => {
-    link.addEventListener("pointerenter", () => cursor.classList.add("show"));
-    link.addEventListener("pointerleave", () => cursor.classList.remove("show"));
+  addEventListener("pointermove", event => {
+    cursor.style.transform = `translate3d(${event.clientX}px,${event.clientY}px,0)`;
+    cursor.classList.add("show");
   });
+  document.documentElement.addEventListener("mouseleave", () => cursor.classList.remove("show"));
 }

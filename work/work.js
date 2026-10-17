@@ -185,9 +185,11 @@ if (matchMedia("(prefers-reduced-motion:no-preference)").matches) {
     if (!row) {
       pointer = null;
       marker.classList.remove("is-visible");
+      document.body.classList.remove("work-yellow-cursor");
       return scheduleWave();
     }
     marker.classList.add("is-visible");
+    document.body.classList.add("work-yellow-cursor");
     marker.style.setProperty("--pointer-x", `${x}px`);
     marker.style.setProperty("--pointer-y", `${y}px`);
     const field = target.closest(".work-cell");
@@ -204,6 +206,7 @@ if (matchMedia("(prefers-reduced-motion:no-preference)").matches) {
   const releasePointer = () => {
     pointer = null;
     marker.classList.remove("is-visible");
+    document.body.classList.remove("work-yellow-cursor");
     scheduleWave();
   };
 
