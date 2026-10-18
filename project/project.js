@@ -52,7 +52,7 @@ if (!selectedProject) {
   const portfolio = Array.from({length:portfolioCounts[id] || 0}, (_,index) => `../assets/details/${id}/portfolio/spread-${String(index + 1).padStart(2,"0")}.webp`);
   const previous = projectCatalogue[(projectIndex - 1 + projectCatalogue.length) % projectCatalogue.length];
   const next = projectCatalogue[(projectIndex + 1) % projectCatalogue.length];
-  document.title = `${title} — Yutong Chen`;
+  document.title = `${title} — YUTONG CHEN Portfolio`;
   document.querySelector('meta[name="description"]').content = `${title}: ${description}`;
   main.innerHTML = `
     <article>
