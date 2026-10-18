@@ -12,9 +12,10 @@ a { color: inherit; text-decoration: none; }
 .site-header a::after { content: ""; position: absolute; left: 0; right: 100%; bottom: -4px; height: 1px; background: currentColor; transition: right 180ms ease; }
 .site-header a:hover::after, .site-header a:focus-visible::after { right: 0; }
 .brand { width: auto; margin-right: clamp(26px,2.4vw,40px); font-weight: 400; }
-.site-header .icon-link { display: grid; width: 26px; height: 26px; place-items: center; }
+.site-header .icon-link { display: grid; width: 30px; height: 30px; place-items: center; border-radius: 50%; transition: color 180ms ease, background 180ms ease; }
 .site-header .icon-link svg { display: block; width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 .site-header .icon-link::after { display: none; }
+.site-header .icon-link:hover, .site-header .icon-link:focus-visible { color: #fff; background: #111; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 .work-grid { min-height: calc(100vh - var(--header)); padding: var(--gap) var(--edge) 0; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); grid-auto-rows: 118px; grid-auto-flow: dense; gap: var(--gap); }
 .project { position: relative; min-height: 0; overflow: hidden; background: #e8e8e8; }

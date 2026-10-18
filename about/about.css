@@ -22,6 +22,13 @@
 .about-row { display: grid; grid-template-columns: minmax(180px,240px) minmax(0,1fr); gap: 18px; padding-block: 5px; }
 .about-row p { min-width: 0; overflow-wrap: anywhere; }
 .about-period { font-variant-numeric: tabular-nums; }
+.award-entry { min-width: 0; }
+.award-certificate { margin-top: 4px; }
+.award-certificate summary { position: relative; width: fit-content; padding-right: 22px; color: #727272; list-style: none; }
+.award-certificate summary::-webkit-details-marker { display: none; }
+.award-certificate summary::after { content: "↓"; position: absolute; right: 0; top: 0; transition: transform 180ms ease; }
+.award-certificate[open] summary::after { transform: rotate(180deg); }
+.award-certificate img { display: block; width: min(320px,100%); height: auto; margin-top: 10px; }
 @media (max-width: 900px) {
   .about-identity, .about-biography { gap: 30px; }
   .about-contact-group { grid-template-columns: 1fr; }

@@ -10,13 +10,13 @@ const media = {
   "forbidden-hue": ["gallery/outcome-01.webp"]
 };
 const videos = {
-  "poopslaves": "-NzMnuMocVc",
-  "plantievers-illusion": "IBD6i4xdrcI",
-  "value-machine": "tD2CHMm-ljE",
-  "fetorium": "fRwI4zcNDsA",
-  "plated-fantasies": "fV_Jrce0Wlg",
-  "closet-x": "7PBkRF7aY6c",
-  "feeding-fear": "bo7ichlhwmQ"
+  "poopslaves": [["-NzMnuMocVc","Main film / 主片"],["4yT4qBsznL8","Interactive outcome / 交互成果"],["fpVo-T5GLMI","CAVE dome showcase / 穹顶展示"]],
+  "plantievers-illusion": [["IBD6i4xdrcI","Installation film / 装置影像"]],
+  "value-machine": [["tD2CHMm-ljE","Project film / 项目影像"]],
+  "fetorium": [["fRwI4zcNDsA","Project film / 项目影像"]],
+  "plated-fantasies": [["fV_Jrce0Wlg","Project film / 项目影像"]],
+  "closet-x": [["7PBkRF7aY6c","Project film / 项目影像"]],
+  "feeding-fear": [["bo7ichlhwmQ","Project film / 项目影像"]]
 };
 const portfolioCounts = {"poopslaves":6,"plantievers-illusion":4,"value-machine":5,"fetorium":5,"plated-fantasies":4};
 const heroOverrides = {"closet-x":"../assets/details/closet-x/gallery/outcome-01.jpg"};
@@ -65,7 +65,7 @@ if (!selectedProject) {
       </header>
       <figure class="project-hero"><img src="${hero}" alt="${escapeHtml(title)} project image" fetchpriority="high"><figcaption class="project-caption">${escapeHtml(title)} — project documentation.</figcaption></figure>
       <section class="project-copy"><h2>Overview</h2><div><p>${escapeHtml(description)}</p><p>The project brings ${escapeHtml(focus.toLowerCase())} into an experience that can be entered, tested and discussed. The work develops through research, prototyping and visual documentation.</p></div></section>
-      ${videos[id] ? `<section class="project-video" aria-label="${escapeHtml(title)} video"><iframe src="https://www.youtube-nocookie.com/embed/${videos[id]}" title="${escapeHtml(title)} video" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></section>` : ""}
+      ${videos[id] ? `<section class="project-videos" aria-label="${escapeHtml(title)} videos">${videos[id].map(([videoId,label]) => `<figure class="project-video"><iframe src="https://www.youtube-nocookie.com/embed/${videoId}" title="${escapeHtml(title)} — ${escapeHtml(label)}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe><figcaption class="project-caption">${escapeHtml(label)}</figcaption></figure>`).join("")}</section>` : ""}
       ${gallery.length ? `<section class="project-gallery project-gallery--pair" aria-label="Project documentation">${gallery.map((src,index) => `<figure><img src="${src}" alt="${escapeHtml(title)} documentation ${index + 1}" loading="lazy"><figcaption class="project-caption">Project documentation ${String(index + 1).padStart(2,"0")}.</figcaption></figure>`).join("")}</section>` : ""}
       ${portfolio.length ? `<section class="portfolio-series"><header><div><h2>Portfolio series</h2><p>Original full-resolution spreads</p></div><p>Drag or scroll horizontally / 左右滑动</p></header><div class="portfolio-rail" tabindex="0" aria-label="${escapeHtml(title)} portfolio images">${portfolio.map((src,index) => `<figure><img src="${src}" alt="${escapeHtml(title)} portfolio spread ${index + 1}" loading="lazy" draggable="false"><figcaption class="project-caption">${String(index + 1).padStart(2,"0")} / ${String(portfolio.length).padStart(2,"0")}</figcaption></figure>`).join("")}</div></section>` : ""}
       <section class="project-copy"><h2>Process</h2><div><p>${escapeHtml(format)} is used as a way to examine ${escapeHtml(focus.toLowerCase())} through direct experience.</p><p>The final outcome connects the project’s research question with a concrete interaction, allowing its ideas to be encountered rather than only described.</p></div></section>
