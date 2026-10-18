@@ -168,7 +168,8 @@ if (matchMedia("(prefers-reduced-motion:no-preference)").matches) {
       row.querySelectorAll(".pointer-title__char").forEach(char => {
         const state = offsets.get(char);
         const delta = state.target - state.value;
-        state.value = Math.abs(delta) < .05 ? state.target : state.value + delta * .22;
+        const response = pointer?.touch ? .62 : .22;
+        state.value = Math.abs(delta) < .05 ? state.target : state.value + delta * response;
         char.style.setProperty("--glyph-x", `${state.value.toFixed(2)}px`);
         if (Math.abs(state.target - state.value) >= .05) moving = rowMoving = true;
       });
@@ -180,7 +181,7 @@ if (matchMedia("(prefers-reduced-motion:no-preference)").matches) {
     if (moving) frame = requestAnimationFrame(animateWave);
   };
 
-  const updatePointer = (x, y, target) => {
+  const updatePointer = (x, y, target, touch = false) => {
     const row = target?.closest(".work-row");
     if (!row) {
       pointer = null;
@@ -199,7 +200,7 @@ if (matchMedia("(prefers-reduced-motion:no-preference)").matches) {
       rowsInMotion.add(row);
       row.querySelectorAll(".pointer-title__char").forEach(char => offsets.set(char, {value:0, target:0}));
     }
-    pointer = field ? {row, field, x:Math.round(x)} : null;
+    pointer = field ? {row, field, x:Math.round(x), touch} : null;
     scheduleWave();
   };
 
@@ -213,13 +214,16 @@ if (matchMedia("(prefers-reduced-motion:no-preference)").matches) {
   table.addEventListener("pointermove", event => {
     if (event.pointerType !== "touch") updatePointer(event.clientX, event.clientY, event.target);
   });
+  table.addEventListener("pointerdown", event => {
+    if (event.pointerType === "touch") updatePointer(event.clientX, event.clientY, document.elementFromPoint(event.clientX, event.clientY), true);
+  }, {passive:true});
   table.addEventListener("touchstart", event => {
     const touch = event.touches[0];
-    if (touch) updatePointer(touch.clientX, touch.clientY, document.elementFromPoint(touch.clientX, touch.clientY));
+    if (touch) updatePointer(touch.clientX, touch.clientY, document.elementFromPoint(touch.clientX, touch.clientY), true);
   }, {passive:true});
   table.addEventListener("touchmove", event => {
     const touch = event.touches[0];
-    if (touch) updatePointer(touch.clientX, touch.clientY, document.elementFromPoint(touch.clientX, touch.clientY));
+    if (touch) updatePointer(touch.clientX, touch.clientY, document.elementFromPoint(touch.clientX, touch.clientY), true);
   }, {passive:true});
   table.addEventListener("touchend", releasePointer, {passive:true});
   table.addEventListener("touchcancel", releasePointer, {passive:true});

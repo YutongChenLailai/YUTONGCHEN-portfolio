@@ -45,6 +45,9 @@
 .work-page.work-yellow-cursor .cursor { opacity: 0; }
 .work-pointer { position: fixed; z-index: 30; left: 0; top: 0; width: 42px; height: 42px; margin: -21px 0 0 -21px; border-radius: 50%; background: #ffff18; opacity: 0; transform: translate3d(var(--pointer-x,-60px),var(--pointer-y,-60px),0); transition: transform 40ms linear, opacity 80ms linear; pointer-events: none; }
 .work-pointer.is-visible { opacity: 1; }
+@media (pointer: coarse) {
+  .work-pointer { transition: none; }
+}
 @media (max-width: 760px) {
   .work-page { --header: 44px; }
   .work-layout { padding-inline: var(--edge); }
