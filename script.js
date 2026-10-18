@@ -1,15 +1,15 @@
 const detailBase = "project/?id=";
 const projects = [
+  ["VIVID", "vivid", "Revisiting community memories with AI.", "human–AI interaction · participatory design", "2026", "Human–AI co-creation", ["Design", "Research"]],
   ["PoopSlaves", "poopslaves", "Speculative VR system.", "VR · interaction · research", "2025", "Speculative systems", ["Design", "Research"]],
   ["Value Machine", "value-machine", "Participatory art-market critique.", "installation · authorship · participation", "2025", "Authorship · cultural value", ["Art", "Design"]],
+  ["Drown in Algae", "drown-in-algae", "Ecological witnessing.", "bio-art · coastal ecology · installation", "2025", "Ecology · environmental value", ["Art", "Design"]],
   ["Plantiever’s Illusion", "plantievers-illusion", "Moving-image installation.", "film · installation · cultural symbols", "2024", "Cultural symbols · memory", ["Art"]],
   ["Fetorium", "fetorium", "Perceiving smell without physical odor.", "interactive installation · experimental media art", "2024", "Olfaction · perception", ["Art", "Design"]],
   ["Plated Fantasies", "plated-fantasies", "Reframing food perception.", "sensory interaction · perception", "2024", "Food · sensory experience", ["Art", "Design"]],
   ["Closet X", "closet-x", "AI wardrobe interface.", "UX · AI recognition · virtual try-on", "2024", "AI · wardrobe", ["Design", "Research"]],
   ["Navigating the Past", "navigating-the-past", "Urban memory in augmented reality.", "AR · heritage · urban experience", "2024", "Urban memory · heritage", ["Design", "Research"]],
-  ["VIVID", "vivid", "Revisiting community memories with AI.", "human–AI interaction · participatory design", "2026", "Human–AI co-creation", ["Design", "Research"]],
   ["Feeding Fear / PEEEP", "feeding-fear", "Experimental moving image.", "video art · social psychology", "2023", "Fear · social psychology", ["Art"]],
-  ["Drown in Algae", "drown-in-algae", "Ecological witnessing.", "bio-art · coastal ecology · installation", "2025", "Ecology · environmental value", ["Art", "Design"]],
   ["The Forbidden Hue", "forbidden-hue", "Heritage through virtual play.", "VR game · heritage · narrative", "2023", "Heritage · narrative", ["Art", "Design"]]
 ];
 window.portfolioProjects = projects;
