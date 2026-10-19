@@ -116,6 +116,7 @@ const renderRows = () => {
 
 renderFilters();
 renderRows();
+updatePreview(activeProject);
 
 if (matchMedia("(prefers-reduced-motion:no-preference)").matches) {
   const marker = document.createElement("span");
