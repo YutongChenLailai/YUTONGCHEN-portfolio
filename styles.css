@@ -44,6 +44,7 @@ footer { min-height: 120px; padding: 20px var(--edge); display: flex; justify-co
 .cursor span { display: none; }
 .cursor.show { opacity: 1; }
 .cursor.is-action { width: 42px; height: 42px; margin: -21px 0 0 -21px; background: #ffff18; }
+.cursor.is-touch { transition: none; }
 :focus-visible { outline: 2px solid #111; outline-offset: 2px; }
 html, body, body * { cursor: none !important; }
 @media (max-width: 700px) {
@@ -57,7 +58,7 @@ html, body, body * { cursor: none !important; }
   .project img { width: 100%; height: auto; object-fit: contain; }
   .meta { position: static; width: auto; grid-template-columns: 1fr auto; padding: 8px 0 18px; color: #111; background: none; border: 0; border-radius: 0; box-shadow: none; opacity: 1; transform: none; backdrop-filter: none; }
   .meta .description, .meta .category { display: none; }
-  .cursor { display: none; }
+  .cursor { display: block; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

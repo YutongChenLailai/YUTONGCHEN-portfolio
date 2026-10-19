@@ -71,11 +71,36 @@ if (grid) {
 }
 
 const cursor = document.querySelector(".cursor");
-if (matchMedia("(pointer:fine)").matches) {
+if (cursor && matchMedia("(pointer:fine)").matches) {
   addEventListener("pointermove", event => {
     cursor.style.transform = `translate3d(${event.clientX}px,${event.clientY}px,0)`;
     cursor.classList.add("show");
     cursor.classList.toggle("is-action", Boolean(event.target.closest("a,button")));
   });
   document.documentElement.addEventListener("mouseleave", () => cursor.classList.remove("show"));
+} else if (cursor) {
+  const interactive = "a,button,summary,[role='button'],input,select,textarea,label[for]";
+  let touchActive = false;
+  let hideTimer = 0;
+
+  addEventListener("pointerdown", event => {
+    if (event.pointerType !== "touch" || !event.target.closest(interactive) || event.target.closest(".work-table")) return;
+    clearTimeout(hideTimer);
+    touchActive = true;
+    cursor.style.transform = `translate3d(${event.clientX}px,${event.clientY}px,0)`;
+    cursor.classList.add("show", "is-action", "is-touch");
+  }, {passive:true});
+
+  addEventListener("pointermove", event => {
+    if (!touchActive || event.pointerType !== "touch") return;
+    cursor.style.transform = `translate3d(${event.clientX}px,${event.clientY}px,0)`;
+  }, {passive:true});
+
+  const releaseTouch = event => {
+    if (!touchActive || event.pointerType !== "touch") return;
+    touchActive = false;
+    hideTimer = setTimeout(() => cursor.classList.remove("show", "is-action", "is-touch"), 90);
+  };
+  addEventListener("pointerup", releaseTouch, {passive:true});
+  addEventListener("pointercancel", releaseTouch, {passive:true});
 }
