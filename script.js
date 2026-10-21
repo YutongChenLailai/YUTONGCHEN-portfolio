@@ -1,7 +1,7 @@
 const detailBase = "project/?id=";
 const projects = [
-  ["Community Feedback in Vibe Coding", "community-feedback-vibe-coding", "A bounded workflow for turning community feedback into AI-mediated app revisions.", "HCI · vibe coding · community feedback", "2027", "Human–AI co-creation · collaborative iteration", ["Research"]],
-  ["Sketches as Previews", "sketches-as-previews", "How people turn videos into storyboard-style visual previews.", "HCI · visual representation · video previews", "2027", "Visual communication · collaborative evaluation", ["Research"]],
+  ["How Community Feedback Affects Vibe Coding Creative Processes", "community-feedback-vibe-coding", "A bounded workflow for turning community feedback into AI-mediated app revisions.", "HCI · vibe coding · community feedback", "2027", "Human–AI co-creation · collaborative iteration", ["Research"]],
+  ["Sketches as Previews: How Humans Sketch Visual Representations for Videos", "sketches-as-previews", "How people turn videos into storyboard-style visual previews.", "HCI · visual representation · video previews", "2027", "Visual communication · collaborative evaluation", ["Research"]],
   ["VIVID", "vivid", "Revisiting community memories with AI.", "human–AI interaction · participatory design", "2026", "Human–AI co-creation", ["Design", "Research"]],
   ["PoopSlaves", "poopslaves", "Speculative VR system.", "VR · interaction · research", "2025", "Speculative systems", ["Design", "Research"]],
   ["Value Machine", "value-machine", "Participatory art-market critique.", "installation · authorship · participation", "2025", "Authorship · cultural value", ["Art", "Design"]],
