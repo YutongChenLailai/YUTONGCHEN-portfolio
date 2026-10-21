@@ -40,7 +40,7 @@ a { color: inherit; text-decoration: none; }
 .project-10 { grid-column: 2; grid-row: span 3; }
 .project-11 { grid-column: 3; grid-row: span 4; }
 footer { min-height: 120px; padding: 20px var(--edge); display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid #111; }
-.cursor { position: fixed; z-index: 100; top: 0; left: 0; width: 9px; height: 9px; margin: -4px 0 0 -4px; border-radius: 50%; background: #111; opacity: 0; pointer-events: none; transition: opacity 80ms linear; }
+.cursor { position: fixed; z-index: 100; top: 0; left: 0; width: 9px; height: 9px; margin: -4px 0 0 -4px; border-radius: 50%; background: #111; opacity: 0; pointer-events: none; transition: opacity 80ms linear; will-change: transform; }
 .cursor span { display: none; }
 .cursor.show { opacity: 1; }
 .cursor.is-action { width: 42px; height: 42px; margin: -21px 0 0 -21px; background: #ffff18; }

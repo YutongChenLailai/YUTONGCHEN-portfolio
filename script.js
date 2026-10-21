@@ -83,24 +83,26 @@ if (cursor && matchMedia("(pointer:fine)").matches) {
   let touchActive = false;
   let hideTimer = 0;
 
-  addEventListener("pointerdown", event => {
-    if (event.pointerType !== "touch" || !event.target.closest(interactive) || event.target.closest(".work-table")) return;
+  addEventListener("touchstart", event => {
+    const touch = event.touches[0];
+    if (!touch || !event.target.closest(interactive) || event.target.closest(".work-table")) return;
     clearTimeout(hideTimer);
     touchActive = true;
-    cursor.style.transform = `translate3d(${event.clientX}px,${event.clientY}px,0)`;
+    cursor.style.transform = `translate3d(${touch.clientX}px,${touch.clientY}px,0)`;
     cursor.classList.add("show", "is-action", "is-touch");
   }, {passive:true});
 
-  addEventListener("pointermove", event => {
-    if (!touchActive || event.pointerType !== "touch") return;
-    cursor.style.transform = `translate3d(${event.clientX}px,${event.clientY}px,0)`;
+  addEventListener("touchmove", event => {
+    const touch = event.touches[0];
+    if (!touchActive || !touch) return;
+    cursor.style.transform = `translate3d(${touch.clientX}px,${touch.clientY}px,0)`;
   }, {passive:true});
 
-  const releaseTouch = event => {
-    if (!touchActive || event.pointerType !== "touch") return;
+  const releaseTouch = () => {
+    if (!touchActive) return;
     touchActive = false;
     hideTimer = setTimeout(() => cursor.classList.remove("show", "is-action", "is-touch"), 90);
   };
-  addEventListener("pointerup", releaseTouch, {passive:true});
-  addEventListener("pointercancel", releaseTouch, {passive:true});
+  addEventListener("touchend", releaseTouch, {passive:true});
+  addEventListener("touchcancel", releaseTouch, {passive:true});
 }
