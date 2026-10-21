@@ -44,8 +44,8 @@ const papers = {
     questionCn: "社区反馈如何改变创作方向、潜在意图、对可行性的判断，以及创作者在既有讨论中的位置？",
     findings: "Community input expands the option space beyond obvious fixes, gives language to latent intentions, makes unfamiliar directions feel feasible through peer examples, and prompts creators to decide when and how feedback should enter their own process.",
     findingsCn: "社区意见不仅提供修改建议，也会拓展创作者的选择空间、帮助表达尚未成形的意图、通过同伴案例重新校准可行性，并促使创作者判断何时以及如何回应既有讨论。",
-    pdf: "workflow.pdf",
-    pdfLabel: "Project workflow PDF / 项目流程图"
+    mediaLabel: "Project workflow / 项目流程图",
+    image: "workflow.png"
   },
   "sketches-as-previews": {
     title: "Sketches as Previews: How Humans Sketch Visual Representations for Videos",
@@ -55,8 +55,8 @@ const papers = {
     questionCn: "当动态视频被压缩成简短的静态预览时，人们如何选择并编码动作、情绪、因果关系与镜头运动？",
     findings: "Participants combined colour, salience, mood shading, arrows, motion lines, labels, speech bubbles, designed typography, and deliberate omission. Peer evaluation revealed which visual conventions remained legible and which required revision.",
     findingsCn: "参与者综合使用色彩、视觉显著性、氛围明暗、箭头、运动线、文字标签、对话框、设计字体与主动省略。同伴评估进一步揭示哪些视觉惯例能够被准确理解，哪些需要重新修订。",
-    pdf: "manuscript.pdf",
-    pdfLabel: "Research manuscript / 研究手稿"
+    mediaLabel: "Research manuscript / 研究手稿",
+    pages: 30
   }
 };
 
@@ -66,6 +66,9 @@ const projectCatalogue = window.portfolioProjects || [];
 const projectIndex = projectCatalogue.findIndex(item => item[1] === slug);
 const selectedProject = projectCatalogue[projectIndex];
 const escapeHtml = value => String(value).replace(/[&<>"']/g, char => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[char]);
+const renderPaperMedia = (paper, id) => paper.image
+  ? `<section class="paper-media paper-media--workflow" aria-label="${escapeHtml(paper.mediaLabel)}"><h2>${escapeHtml(paper.mediaLabel)}</h2><img src="../assets/details/${id}/paper/${paper.image}" alt="${escapeHtml(paper.mediaLabel)}" loading="lazy"></section>`
+  : `<section class="paper-media paper-media--manuscript" aria-label="${escapeHtml(paper.mediaLabel)}"><h2>${escapeHtml(paper.mediaLabel)}</h2><div class="paper-scroll-reader" tabindex="0" aria-label="Scrollable research manuscript">${Array.from({length:paper.pages}, (_,index) => `<img src="../assets/details/${id}/paper/pages/page-${String(index + 1).padStart(2,"0")}.jpg" alt="${escapeHtml(paper.title)} page ${index + 1}" loading="lazy">`).join("")}</div></section>`;
 
 if (!selectedProject) {
   document.title = "Project not found — Yutong Chen";
@@ -92,7 +95,7 @@ if (!selectedProject) {
       </header>
       <figure class="project-hero"><img src="${hero}" alt="${escapeHtml(title)} project image" fetchpriority="high"><figcaption class="project-caption">${escapeHtml(title)} — project documentation.</figcaption></figure>
       <section class="project-copy"><h2>Overview</h2><div><p>${escapeHtml(description)}</p><p>${paper ? escapeHtml(longCopy) : `The project brings ${escapeHtml(focus.toLowerCase())} into an experience that can be entered, tested and discussed. The work develops through research, prototyping and visual documentation.`}</p></div></section>
-      ${paper ? `<section class="project-copy"><h2>Research question</h2><div><p>${escapeHtml(paper.question)}</p><p class="project-cn" lang="zh-CN">${escapeHtml(paper.questionCn)}</p></div></section><section class="project-copy project-copy--findings"><h2>Key findings</h2><div><p>${escapeHtml(paper.findings)}</p><p class="project-cn" lang="zh-CN">${escapeHtml(paper.findingsCn)}</p></div></section><section class="project-copy project-copy--findings"><h2>Study design</h2><div><p>${escapeHtml(paper.methods)}</p><p class="project-cn" lang="zh-CN">${escapeHtml(paper.methodsCn)}</p></div></section><details class="paper-disclosure"><summary><span>${escapeHtml(paper.pdfLabel)}</span><span class="paper-arrow" aria-hidden="true">↓</span></summary><div><p>${escapeHtml(paper.title)}</p><p class="paper-meta">${escapeHtml(paper.methods)}</p><a class="paper-action" href="../assets/details/${id}/paper/${paper.pdf}" target="_blank" rel="noreferrer">Open PDF / 打开 PDF ↗</a></div></details>` : ""}
+      ${paper ? `<section class="project-copy"><h2>Research question</h2><div><p>${escapeHtml(paper.question)}</p><p class="project-cn" lang="zh-CN">${escapeHtml(paper.questionCn)}</p></div></section><section class="project-copy project-copy--findings"><h2>Key findings</h2><div><p>${escapeHtml(paper.findings)}</p><p class="project-cn" lang="zh-CN">${escapeHtml(paper.findingsCn)}</p></div></section><section class="project-copy project-copy--findings"><h2>Study design</h2><div><p>${escapeHtml(paper.methods)}</p><p class="project-cn" lang="zh-CN">${escapeHtml(paper.methodsCn)}</p></div></section>${renderPaperMedia(paper, id)}` : ""}
       ${videos[id] ? `<section class="project-videos" aria-label="${escapeHtml(title)} videos">${videos[id].map(([videoId,label]) => `<figure class="project-video"><iframe src="https://www.youtube-nocookie.com/embed/${videoId}" title="${escapeHtml(title)} — ${escapeHtml(label)}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe><figcaption class="project-caption">${escapeHtml(label)}</figcaption></figure>`).join("")}</section>` : ""}
       ${gallery.length ? `<section class="project-gallery project-gallery--pair" aria-label="Project documentation">${gallery.map((src,index) => `<figure><img src="${src}" alt="${escapeHtml(title)} documentation ${index + 1}" loading="lazy"><figcaption class="project-caption">Project documentation ${String(index + 1).padStart(2,"0")}.</figcaption></figure>`).join("")}</section>` : ""}
       ${portfolio.length ? `<section class="portfolio-series"><header><div><h2>Portfolio series</h2><p>Original full-resolution spreads</p></div><p>Drag or scroll horizontally / 左右滑动</p></header><div class="portfolio-rail" tabindex="0" aria-label="${escapeHtml(title)} portfolio images">${portfolio.map((src,index) => `<figure><img src="${src}" alt="${escapeHtml(title)} portfolio spread ${index + 1}" loading="lazy" draggable="false"><figcaption class="project-caption">${String(index + 1).padStart(2,"0")} / ${String(portfolio.length).padStart(2,"0")}</figcaption></figure>`).join("")}</div></section>` : ""}

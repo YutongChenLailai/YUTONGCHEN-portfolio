@@ -14,15 +14,14 @@
 .project-video { margin: 0; }
 .project-video iframe { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; background: #000; }
 .project-copy--findings { padding-top:0; }
-.paper-disclosure { margin:0 0 clamp(64px,9vw,130px); border-top:1px solid #cfcfcf; border-bottom:1px solid #cfcfcf; }
-.paper-disclosure summary { display:flex; justify-content:space-between; gap:24px; padding:16px 0; cursor:pointer; list-style:none; font-size:16px; }
-.paper-disclosure summary::-webkit-details-marker { display:none; }
-.paper-arrow { transition:transform 180ms ease; }
-.paper-disclosure[open] .paper-arrow { transform:rotate(180deg); }
-.paper-disclosure>div { max-width:680px; padding:8px 0 22px; }
-.paper-disclosure p { margin:0 0 10px; font-size:18px; line-height:1.28; }
-.paper-disclosure .paper-meta { color:#666; font-size:14px; }
-.paper-action { display:inline-block; margin-top:8px; padding-bottom:3px; border-bottom:1px solid currentColor; font-size:16px; }
+.paper-media { margin:0 0 clamp(64px,9vw,130px); border-top:1px solid #cfcfcf; padding-top:16px; }
+.paper-media h2 { margin:0 0 18px; font-size:16px; font-weight:400; }
+.paper-media--workflow img { display:block; width:100%; height:auto; background:#fff; }
+.paper-scroll-reader { width:min(360px,100%); height:min(56vh,520px); overflow-y:auto; overscroll-behavior:contain; background:#fff; scrollbar-width:thin; scrollbar-color:rgba(0,0,0,.18) transparent; }
+.paper-scroll-reader::-webkit-scrollbar { width:4px; }
+.paper-scroll-reader::-webkit-scrollbar-track { background:transparent; }
+.paper-scroll-reader::-webkit-scrollbar-thumb { border-radius:4px; background:rgba(0,0,0,.18); }
+.paper-scroll-reader img { display:block; width:100%; height:auto; margin:0 0 1px; background:#fff; }
 .project-copy { display: grid; grid-template-columns: minmax(180px,.55fr) minmax(0,1.45fr); gap: clamp(32px,8vw,150px); padding: clamp(64px,9vw,130px) 0; }
 .project-copy h2 { margin: 0; font-size: 18px; font-weight: 500; text-transform: uppercase; }
 .project-copy div { max-width: 850px; }
