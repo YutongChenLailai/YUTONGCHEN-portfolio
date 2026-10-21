@@ -39,12 +39,24 @@ const papers = {
   "community-feedback-vibe-coding": {
     title: "How Community Feedback Affects Vibe Coding Creative Processes",
     methods: "25-person formative study · N=30 deployment study · approximately 8 days · 260 contributions · 60 version transitions",
-    methodsCn: "25 人形成性研究 · 30 人部署研究 · 约 8 天 · 260 条社区贡献 · 60 次版本转换"
+    methodsCn: "25 人形成性研究 · 30 人部署研究 · 约 8 天 · 260 条社区贡献 · 60 次版本转换",
+    question: "How does community feedback reshape creative direction, intention, perceived feasibility, and a creator’s position within an existing discussion?",
+    questionCn: "社区反馈如何改变创作方向、潜在意图、对可行性的判断，以及创作者在既有讨论中的位置？",
+    findings: "Community input expands the option space beyond obvious fixes, gives language to latent intentions, makes unfamiliar directions feel feasible through peer examples, and prompts creators to decide when and how feedback should enter their own process.",
+    findingsCn: "社区意见不仅提供修改建议，也会拓展创作者的选择空间、帮助表达尚未成形的意图、通过同伴案例重新校准可行性，并促使创作者判断何时以及如何回应既有讨论。",
+    pdf: "workflow.pdf",
+    pdfLabel: "Project workflow PDF / 项目流程图"
   },
   "sketches-as-previews": {
     title: "Sketches as Previews: How Humans Sketch Visual Representations for Videos",
     methods: "42 participants · three-person draw-and-evaluate task · four-panel storyboard previews",
-    methodsCn: "42 名参与者 · 三人绘制与评估任务 · 四格故事板预览"
+    methodsCn: "42 名参与者 · 三人绘制与评估任务 · 四格故事板预览",
+    question: "How do people select, compress, and visually encode movement, emotion, causality, and camera action when a video must become a short static preview?",
+    questionCn: "当动态视频被压缩成简短的静态预览时，人们如何选择并编码动作、情绪、因果关系与镜头运动？",
+    findings: "Participants combined colour, salience, mood shading, arrows, motion lines, labels, speech bubbles, designed typography, and deliberate omission. Peer evaluation revealed which visual conventions remained legible and which required revision.",
+    findingsCn: "参与者综合使用色彩、视觉显著性、氛围明暗、箭头、运动线、文字标签、对话框、设计字体与主动省略。同伴评估进一步揭示哪些视觉惯例能够被准确理解，哪些需要重新修订。",
+    pdf: "manuscript.pdf",
+    pdfLabel: "Research manuscript / 研究手稿"
   }
 };
 
@@ -80,11 +92,11 @@ if (!selectedProject) {
       </header>
       <figure class="project-hero"><img src="${hero}" alt="${escapeHtml(title)} project image" fetchpriority="high"><figcaption class="project-caption">${escapeHtml(title)} — project documentation.</figcaption></figure>
       <section class="project-copy"><h2>Overview</h2><div><p>${escapeHtml(description)}</p><p>${paper ? escapeHtml(longCopy) : `The project brings ${escapeHtml(focus.toLowerCase())} into an experience that can be entered, tested and discussed. The work develops through research, prototyping and visual documentation.`}</p></div></section>
-      ${paper ? `<section class="paper-section"><figure><img src="../assets/details/${id}/paper/page-01.webp" alt="First page of ${escapeHtml(paper.title)}" loading="lazy"><figcaption class="project-caption">Research manuscript · 研究手稿</figcaption></figure><div class="paper-details"><p class="paper-kicker">Full manuscript / 完整论文</p><h2>${escapeHtml(paper.title)}</h2><p>${escapeHtml(paper.methods)}</p><p class="project-cn" lang="zh-CN">${escapeHtml(paper.methodsCn)}</p><a class="paper-action" href="../assets/details/${id}/paper/manuscript.pdf" target="_blank" rel="noreferrer">Read full paper / 下载 PDF ↗</a></div></section>` : ""}
+      ${paper ? `<section class="project-copy"><h2>Research question</h2><div><p>${escapeHtml(paper.question)}</p><p class="project-cn" lang="zh-CN">${escapeHtml(paper.questionCn)}</p></div></section><section class="project-copy project-copy--findings"><h2>Key findings</h2><div><p>${escapeHtml(paper.findings)}</p><p class="project-cn" lang="zh-CN">${escapeHtml(paper.findingsCn)}</p></div></section><section class="project-copy project-copy--findings"><h2>Study design</h2><div><p>${escapeHtml(paper.methods)}</p><p class="project-cn" lang="zh-CN">${escapeHtml(paper.methodsCn)}</p></div></section><details class="paper-disclosure"><summary><span>${escapeHtml(paper.pdfLabel)}</span><span class="paper-arrow" aria-hidden="true">↓</span></summary><div><p>${escapeHtml(paper.title)}</p><p class="paper-meta">${escapeHtml(paper.methods)}</p><a class="paper-action" href="../assets/details/${id}/paper/${paper.pdf}" target="_blank" rel="noreferrer">Open PDF / 打开 PDF ↗</a></div></details>` : ""}
       ${videos[id] ? `<section class="project-videos" aria-label="${escapeHtml(title)} videos">${videos[id].map(([videoId,label]) => `<figure class="project-video"><iframe src="https://www.youtube-nocookie.com/embed/${videoId}" title="${escapeHtml(title)} — ${escapeHtml(label)}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe><figcaption class="project-caption">${escapeHtml(label)}</figcaption></figure>`).join("")}</section>` : ""}
       ${gallery.length ? `<section class="project-gallery project-gallery--pair" aria-label="Project documentation">${gallery.map((src,index) => `<figure><img src="${src}" alt="${escapeHtml(title)} documentation ${index + 1}" loading="lazy"><figcaption class="project-caption">Project documentation ${String(index + 1).padStart(2,"0")}.</figcaption></figure>`).join("")}</section>` : ""}
       ${portfolio.length ? `<section class="portfolio-series"><header><div><h2>Portfolio series</h2><p>Original full-resolution spreads</p></div><p>Drag or scroll horizontally / 左右滑动</p></header><div class="portfolio-rail" tabindex="0" aria-label="${escapeHtml(title)} portfolio images">${portfolio.map((src,index) => `<figure><img src="${src}" alt="${escapeHtml(title)} portfolio spread ${index + 1}" loading="lazy" draggable="false"><figcaption class="project-caption">${String(index + 1).padStart(2,"0")} / ${String(portfolio.length).padStart(2,"0")}</figcaption></figure>`).join("")}</div></section>` : ""}
-      <section class="project-copy"><h2>${paper ? "Study design" : "Process"}</h2><div><p>${paper ? escapeHtml(paper.methods) : `${escapeHtml(format)} is used as a way to examine ${escapeHtml(focus.toLowerCase())} through direct experience.`}</p><p>${paper ? escapeHtml(paper.methodsCn) : "The final outcome connects the project’s research question with a concrete interaction, allowing its ideas to be encountered rather than only described."}</p></div></section>
+      ${paper ? "" : `<section class="project-copy"><h2>Process</h2><div><p>${escapeHtml(format)} is used as a way to examine ${escapeHtml(focus.toLowerCase())} through direct experience.</p><p>The final outcome connects the project’s research question with a concrete interaction, allowing its ideas to be encountered rather than only described.</p></div></section>`}
       <nav class="project-nav" aria-label="Project navigation"><a href="?id=${previous[1]}">← ${escapeHtml(previous[0])}</a><a href="?id=${next[1]}">${escapeHtml(next[0])} →</a></nav>
     </article>`;
 
