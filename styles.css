@@ -55,6 +55,8 @@ html, body, body * { cursor: none !important; }
   .links { display: none; }
   .work-grid { grid-template-columns: repeat(2,minmax(0,1fr)); grid-auto-rows: 74px; padding-top: var(--gap); }
   .project { grid-column: auto; }
+  .project-1, .project-4, .project-6, .project-8, .project-11 { grid-column: 1; }
+  .project-2, .project-3, .project-5, .project-7, .project-9, .project-10 { grid-column: 2; }
   .project img { width: 100%; height: 100%; object-fit: cover; }
   .meta { display: none; }
   .cursor { display: block; }
