@@ -21,6 +21,8 @@ const videos = {
 const portfolioCounts = {"poopslaves":6,"plantievers-illusion":4,"value-machine":5,"fetorium":5,"plated-fantasies":4};
 const heroOverrides = {"closet-x":"../assets/details/closet-x/gallery/outcome-01.jpg"};
 const projectCopy = {
+  "community-feedback-vibe-coding": ["CoVibe investigates how community feedback can enter AI-mediated application iteration through bounded selection, revision, and version history.", "CoVibe 研究社区反馈如何通过受约束的筛选、AI 辅助修订与版本历史进入应用迭代过程。"],
+  "sketches-as-previews": ["A study of how people compress moving video into four-panel storyboard previews, and how peer evaluation helps them revise visual representations for clarity, meaning, and distinctiveness.", "一项研究人们如何把动态视频压缩为四格故事板预览，以及同伴评估如何帮助创作者提升视觉表征的清晰度、意义与辨识度。"],
   "poopslaves": ["A rule-based virtual economy where bodily waste becomes scarce, governable value. The work makes unequal extraction tangible through constrained agency.", "一个把排泄物设为稀缺货币的推想式 VR 系统，让权力、价值与身体控制变得可感。"],
   "value-machine": ["Visitors feed a fictional artist-machine, generate images and participate in their valuation, exposing how reputation manufactures artistic worth.", "邀请观众参与艺术生产与定价，揭示声誉如何制造价值。"],
   "plantievers-illusion": ["A moving-image installation that keeps auspicious symbols recognisable while changing the conditions under which they are seen, felt and interpreted.", "以动态影像和空间装置重组传统吉祥符号，在熟悉与陌生之间激活文化记忆。"],
@@ -32,6 +34,18 @@ const projectCopy = {
   "feeding-fear": ["A visual investigation of how fear is repeatedly fed by institutions, environments and the social circulation of suspicion.", "研究恐惧如何被环境、制度与社会传播持续喂养的实验影像。"],
   "drown-in-algae": ["Drown in Algae explores how living interfaces and feedback mechanisms can make invisible pollution, ecological remediation, and their environmental value perceptible, intelligible, and participatory.", "Drown in Algae 探索如何通过生命界面与反馈机制，让不可见的污染、生态修复及其环境价值变得可感知、可理解、可参与。"],
   "forbidden-hue": ["How does immersive interaction shape users’ understanding of historical authenticity, cultural identity and narrative power?", "沉浸式交互如何塑造用户对历史真实性、文化身份与叙事权力的理解？"]
+};
+const papers = {
+  "community-feedback-vibe-coding": {
+    title: "How Community Feedback Affects Vibe Coding Creative Processes",
+    methods: "25-person formative study · N=30 deployment study · approximately 8 days · 260 contributions · 60 version transitions",
+    methodsCn: "25 人形成性研究 · 30 人部署研究 · 约 8 天 · 260 条社区贡献 · 60 次版本转换"
+  },
+  "sketches-as-previews": {
+    title: "Sketches as Previews: How Humans Sketch Visual Representations for Videos",
+    methods: "42 participants · three-person draw-and-evaluate task · four-panel storyboard previews",
+    methodsCn: "42 名参与者 · 三人绘制与评估任务 · 四格故事板预览"
+  }
 };
 
 const main = document.querySelector("#project-main");
@@ -52,6 +66,7 @@ if (!selectedProject) {
   const portfolio = Array.from({length:portfolioCounts[id] || 0}, (_,index) => `../assets/details/${id}/portfolio/spread-${String(index + 1).padStart(2,"0")}.webp`);
   const previous = projectCatalogue[(projectIndex - 1 + projectCatalogue.length) % projectCatalogue.length];
   const next = projectCatalogue[(projectIndex + 1) % projectCatalogue.length];
+  const paper = papers[id];
   document.title = `${title} — YUTONG CHEN Portfolio`;
   document.querySelector('meta[name="description"]').content = `${title}: ${description}`;
   main.innerHTML = `
@@ -64,11 +79,12 @@ if (!selectedProject) {
         </div>
       </header>
       <figure class="project-hero"><img src="${hero}" alt="${escapeHtml(title)} project image" fetchpriority="high"><figcaption class="project-caption">${escapeHtml(title)} — project documentation.</figcaption></figure>
-      <section class="project-copy"><h2>Overview</h2><div><p>${escapeHtml(description)}</p><p>The project brings ${escapeHtml(focus.toLowerCase())} into an experience that can be entered, tested and discussed. The work develops through research, prototyping and visual documentation.</p></div></section>
+      <section class="project-copy"><h2>Overview</h2><div><p>${escapeHtml(description)}</p><p>${paper ? escapeHtml(longCopy) : `The project brings ${escapeHtml(focus.toLowerCase())} into an experience that can be entered, tested and discussed. The work develops through research, prototyping and visual documentation.`}</p></div></section>
+      ${paper ? `<section class="paper-section"><figure><img src="../assets/details/${id}/paper/page-01.webp" alt="First page of ${escapeHtml(paper.title)}" loading="lazy"><figcaption class="project-caption">Research manuscript · 研究手稿</figcaption></figure><div class="paper-details"><p class="paper-kicker">Full manuscript / 完整论文</p><h2>${escapeHtml(paper.title)}</h2><p>${escapeHtml(paper.methods)}</p><p class="project-cn" lang="zh-CN">${escapeHtml(paper.methodsCn)}</p><a class="paper-action" href="../assets/details/${id}/paper/manuscript.pdf" target="_blank" rel="noreferrer">Read full paper / 下载 PDF ↗</a></div></section>` : ""}
       ${videos[id] ? `<section class="project-videos" aria-label="${escapeHtml(title)} videos">${videos[id].map(([videoId,label]) => `<figure class="project-video"><iframe src="https://www.youtube-nocookie.com/embed/${videoId}" title="${escapeHtml(title)} — ${escapeHtml(label)}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe><figcaption class="project-caption">${escapeHtml(label)}</figcaption></figure>`).join("")}</section>` : ""}
       ${gallery.length ? `<section class="project-gallery project-gallery--pair" aria-label="Project documentation">${gallery.map((src,index) => `<figure><img src="${src}" alt="${escapeHtml(title)} documentation ${index + 1}" loading="lazy"><figcaption class="project-caption">Project documentation ${String(index + 1).padStart(2,"0")}.</figcaption></figure>`).join("")}</section>` : ""}
       ${portfolio.length ? `<section class="portfolio-series"><header><div><h2>Portfolio series</h2><p>Original full-resolution spreads</p></div><p>Drag or scroll horizontally / 左右滑动</p></header><div class="portfolio-rail" tabindex="0" aria-label="${escapeHtml(title)} portfolio images">${portfolio.map((src,index) => `<figure><img src="${src}" alt="${escapeHtml(title)} portfolio spread ${index + 1}" loading="lazy" draggable="false"><figcaption class="project-caption">${String(index + 1).padStart(2,"0")} / ${String(portfolio.length).padStart(2,"0")}</figcaption></figure>`).join("")}</div></section>` : ""}
-      <section class="project-copy"><h2>Process</h2><div><p>${escapeHtml(format)} is used as a way to examine ${escapeHtml(focus.toLowerCase())} through direct experience.</p><p>The final outcome connects the project’s research question with a concrete interaction, allowing its ideas to be encountered rather than only described.</p></div></section>
+      <section class="project-copy"><h2>${paper ? "Study design" : "Process"}</h2><div><p>${paper ? escapeHtml(paper.methods) : `${escapeHtml(format)} is used as a way to examine ${escapeHtml(focus.toLowerCase())} through direct experience.`}</p><p>${paper ? escapeHtml(paper.methodsCn) : "The final outcome connects the project’s research question with a concrete interaction, allowing its ideas to be encountered rather than only described."}</p></div></section>
       <nav class="project-nav" aria-label="Project navigation"><a href="?id=${previous[1]}">← ${escapeHtml(previous[0])}</a><a href="?id=${next[1]}">${escapeHtml(next[0])} →</a></nav>
     </article>`;
 
