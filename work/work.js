@@ -1,4 +1,6 @@
 const projectKeywords = {
+  "community-feedback-vibe-coding": "Community feedback",
+  "sketches-as-previews": "Visual representation",
   "poopslaves": "Speculation",
   "value-machine": "Authorship",
   "plantievers-illusion": "Memory",
@@ -12,7 +14,7 @@ const projectKeywords = {
   "forbidden-hue": "Heritage"
 };
 const workProjects = window.portfolioProjects.map(([title, slug, description, format, year, focus, categories]) => ({
-  title, slug, description, format, year, focus, categories, keyword: projectKeywords[slug],
+  title, slug, description, format, year, focus, categories, keyword: projectKeywords[slug] || focus || format,
   image: `../assets/projects/${slug}.${slug === "closet-x" || slug === "drown-in-algae" ? "jpg" : "webp"}`,
   url: `../project/?id=${slug}`
 }));
@@ -33,7 +35,7 @@ const categories = ["Art", "Design", "Research"];
 let activeFilter = "All";
 let activeProject = workProjects[0];
 
-const escapeText = text => text.replace(/[&<>"']/g, char => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char]));
+const escapeText = text => String(text ?? "").replace(/[&<>"']/g, char => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char]));
 const segmentText = text => Intl.Segmenter ? [...new Intl.Segmenter("en", {granularity:"grapheme"}).segment(text)] : [...text].map((segment, index) => ({segment, index}));
 const waveText = text => `<span class="pointer-title"><span class="pointer-title__base">${escapeText(text)}</span><span class="pointer-title__wave" aria-hidden="true">${segmentText(text).filter(({segment}) => !/\s/.test(segment)).map(({segment, index}) => `<span class="pointer-title__char" data-start="${index}" data-length="${segment.length}">${escapeText(segment)}</span>`).join("")}</span></span>`;
 
