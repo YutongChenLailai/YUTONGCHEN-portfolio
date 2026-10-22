@@ -18,6 +18,7 @@
 .project-videos--1{grid-template-columns:minmax(0,calc(50% - 4px))}
 .project-videos--2{grid-template-columns:repeat(2,minmax(0,1fr))}
 .project-videos--3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.project-media-grid { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;align-items:start; }
 .project-video { margin: 0; }
 .project-video iframe,.project-video img { display:block;width:100%;aspect-ratio:16/9;border:0;object-fit:cover;background:#000; }
 .project-copy--findings { padding-top:0; }
@@ -83,6 +84,7 @@
   .project-hero--contained figcaption { width:88%; }
   .project-copy p { font-size: 20px; }
   .project-videos--1,.project-videos--2,.project-videos--3{grid-template-columns:1fr}
+  .project-media-grid{grid-template-columns:1fr}
   .project-gallery--pair { grid-template-columns: 1fr; }
   .project-gallery--pair figure:last-child:nth-child(odd) { grid-column: auto; }
   .portfolio-series header { align-items: start; }
