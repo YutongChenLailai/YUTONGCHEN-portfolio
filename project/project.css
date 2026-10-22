@@ -27,12 +27,21 @@
 .paper-scroll-reader img { display:block; width:100%; height:auto; margin:0 0 1px; background:#fff; }
 .project-copy { display: grid; grid-template-columns: minmax(180px,.55fr) minmax(0,1.45fr); gap: clamp(32px,8vw,150px); padding: clamp(64px,9vw,130px) 0; }
 .project-copy h2 { margin: 0; font-size: 18px; font-weight: 500; text-transform: uppercase; }
+.project-copy h2:has(.section-number){display:flex;align-items:center;gap:14px}
+.section-number{display:grid;width:44px;height:44px;flex:0 0 44px;place-items:center;background:#111;color:#fff;font-size:14px;font-weight:500}
 .project-copy div { max-width: 850px; }
 .project-copy p { margin: 0 0 18px; font-size: clamp(20px,1.8vw,27px); line-height: 1.18; }
 .covibe-study-layout { display:grid;grid-template-columns:minmax(220px,.78fr) minmax(360px,1.22fr);gap:clamp(24px,4vw,60px);max-width:none!important;align-items:start; }
 .covibe-study-layout>div { max-width:none; }
 .covibe-study-layout img { display:block;width:100%;height:auto;object-fit:contain;background:#fff; }
 .project-copy--manuscript { content-visibility:auto;contain-intrinsic-size:700px; }
+.covibe-manuscript-row{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(240px,.55fr);gap:clamp(20px,3vw,44px);align-items:start;max-width:none!important}
+.covibe-manuscript-row>img{display:block;width:100%;height:auto;object-fit:contain;background:#fff}
+.covibe-manuscript-row .paper-scroll-reader{width:100%}
+.paper-sections-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,.72fr);gap:clamp(32px,5vw,80px)}
+.paper-sections-row .project-copy{display:block}
+.paper-sections-row .project-copy h2{margin-bottom:32px}
+.paper-sections-row .paper-scroll-reader{width:min(360px,100%)}
 .project-gallery { display: grid; gap: 8px; }
 .project-gallery--pair { grid-template-columns: repeat(2,minmax(0,1fr)); }
 .project-gallery--pair figure:last-child:nth-child(odd) { grid-column: 1 / -1; }
@@ -48,9 +57,10 @@
 .portfolio-rail figure { flex: 0 0 min(88vw,1620px); margin: 0; scroll-snap-align: start; }
 .portfolio-rail img { display: block; width: 100%; height: auto; }
 .project-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding: clamp(58px,7vw,96px) 0; }
-.project-nav a { font-size: clamp(24px,3vw,42px); line-height: 1.05; letter-spacing: -.035em; }
+.project-nav a { min-width:0;font-size:clamp(22px,2.5vw,36px);line-height:1.08;letter-spacing:-.035em;transition:transform 220ms cubic-bezier(.22,.61,.36,1);overflow-wrap:normal;word-break:normal; }
 .project-nav a:last-child { text-align: right; }
-.project-nav-char { display: inline-block; transition: transform 180ms cubic-bezier(.22,.61,.36,1); }
+.project-nav a:last-child:hover{transform:translateX(-28px)}
+.project-nav-word { display:inline-block;white-space:nowrap;transition:transform 180ms cubic-bezier(.22,.61,.36,1); }
 .project-error { min-height: calc(100vh - var(--header)); display: grid; place-content: center; text-align: center; }
 .project-error h1 { margin: 0 0 12px; font-size: 42px; }
 .project-error a { text-decoration: underline; }
@@ -66,6 +76,8 @@
   .project-meta { font-size: 15px; }
   .project-copy { gap: 18px; padding: 56px 0; }
   .covibe-study-layout { grid-template-columns:1fr; }
+  .covibe-manuscript-row,.paper-sections-row { grid-template-columns:1fr; }
+  .covibe-manuscript-row .paper-scroll-reader{width:min(280px,100%)}
   .project-hero--contained { padding:24px 12px; }
   .project-hero--contained img { width:92%;max-height:none; }
   .project-copy p { font-size: 20px; }

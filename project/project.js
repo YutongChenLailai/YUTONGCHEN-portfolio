@@ -1,5 +1,5 @@
 const media = {
-  "community-feedback-vibe-coding": ["gallery/research-finding.webp","gallery/comment-synthesis.webp"],
+  "community-feedback-vibe-coding": ["gallery/research-finding.webp"],
   "poopslaves": ["gallery/outcome-01.webp","gallery/outcome-02.webp","gallery/outcome-03.webp","gallery/outcome-04.webp","gallery/outcome-05.webp"],
   "value-machine": ["gallery/outcome-01.webp","gallery/outcome-02.webp","gallery/outcome-03.webp","gallery/outcome-04.webp","gallery/outcome-05.webp","gallery/outcome-06.webp","gallery/outcome-07.webp"],
   "plantievers-illusion": ["cover/detail-hero.webp","gallery/outcome-01.webp","gallery/outcome-02.webp","gallery/outcome-03.webp","gallery/outcome-04.webp","gallery/outcome-05.webp","gallery/outcome-07.webp","gallery/outcome-08.webp","gallery/outcome-09.webp"],
@@ -46,7 +46,9 @@ const papers = {
     findings: "Community input expands the option space beyond obvious fixes, gives language to latent intentions, makes unfamiliar directions feel feasible through peer examples, and prompts creators to decide when and how feedback should enter their own process.",
     findingsCn: "社区意见不仅提供修改建议，也会拓展创作者的选择空间、帮助表达尚未成形的意图、通过同伴案例重新校准可行性，并促使创作者判断何时以及如何回应既有讨论。",
     mediaLabel: "Project workflow / 项目流程图",
-    image: "workflow.png"
+    image: "workflow.png",
+    manuscriptImage: "gallery/comment-synthesis.webp",
+    pages: 35
   },
   "sketches-as-previews": {
     title: "Sketches as Previews: How Humans Sketch Visual Representations for Videos",
@@ -67,10 +69,16 @@ const projectCatalogue = window.portfolioProjects || [];
 const projectIndex = projectCatalogue.findIndex(item => item[1] === slug);
 const selectedProject = projectCatalogue[projectIndex];
 const escapeHtml = value => String(value).replace(/[&<>"']/g, char => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[char]);
-const renderStudyDesign = (paper, id) => `<section class="project-copy project-copy--study"><h2>Study design</h2><div class="${paper.image ? "covibe-study-layout" : ""}"><div><p>${escapeHtml(paper.methods)}</p><p class="project-cn" lang="zh-CN">${escapeHtml(paper.methodsCn)}</p></div>${paper.image ? `<img src="../assets/details/${id}/paper/${paper.image}" alt="${escapeHtml(paper.mediaLabel)}" loading="lazy" decoding="async">` : ""}</div></section>`;
+const sectionHeading = (number, title) => `<h2><span class="section-number">${number}</span><span>${title}</span></h2>`;
+const renderStudyDesign = (paper, id) => `<section class="project-copy project-copy--study">${sectionHeading("04", "Study design")}<div class="${paper.image ? "covibe-study-layout" : ""}"><div><p>${escapeHtml(paper.methods)}</p><p class="project-cn" lang="zh-CN">${escapeHtml(paper.methodsCn)}</p></div>${paper.image ? `<img src="../assets/details/${id}/paper/${paper.image}" alt="${escapeHtml(paper.mediaLabel)}" loading="lazy" decoding="async">` : ""}</div></section>`;
 const renderPaperMedia = (paper, id) => paper.pages
-  ? `<section class="project-copy project-copy--manuscript" aria-label="${escapeHtml(paper.mediaLabel)}"><h2>${escapeHtml(paper.mediaLabel)}</h2><div class="paper-scroll-reader" tabindex="0" aria-label="Scrollable research manuscript">${Array.from({length:paper.pages}, (_,index) => `<img src="../assets/details/${id}/paper/pages/page-${String(index + 1).padStart(2,"0")}.jpg" alt="${escapeHtml(paper.title)} page ${index + 1}" loading="lazy" decoding="async" fetchpriority="low">`).join("")}</div></section>`
+  ? `<section class="project-copy project-copy--manuscript" aria-label="Research manuscript">${sectionHeading("05", "Research manuscript")}<div class="${paper.manuscriptImage ? "covibe-manuscript-row" : ""}">${paper.manuscriptImage ? `<img src="../assets/details/${id}/${paper.manuscriptImage}" alt="${escapeHtml(paper.title)} comment synthesis" loading="lazy" decoding="async">` : ""}<div class="paper-scroll-reader" tabindex="0" aria-label="Scrollable research manuscript">${Array.from({length:paper.pages}, (_,index) => `<img src="../assets/details/${id}/paper/pages/page-${String(index + 1).padStart(2,"0")}.jpg" alt="${escapeHtml(paper.title)} page ${index + 1}" loading="lazy" decoding="async" fetchpriority="low">`).join("")}</div></div></section>`
   : "";
+const renderFinalPaperSections = (paper, id) => {
+  const study = renderStudyDesign(paper, id);
+  const manuscript = renderPaperMedia(paper, id);
+  return id === "sketches-as-previews" ? `<div class="paper-sections-row">${study}${manuscript}</div>` : `${study}${manuscript}`;
+};
 
 if (!selectedProject) {
   document.title = "Project not found — Yutong Chen";
@@ -96,8 +104,8 @@ if (!selectedProject) {
         </div>
       </header>
       <figure class="project-hero ${id === "sketches-as-previews" ? "project-hero--contained" : ""}"><img src="${hero}" alt="${escapeHtml(title)} project image" fetchpriority="high" decoding="async"><figcaption class="project-caption">${escapeHtml(title)} — project documentation.</figcaption></figure>
-      <section class="project-copy"><h2>Overview</h2><div><p>${escapeHtml(description)}</p><p>${paper ? escapeHtml(longCopy) : `The project brings ${escapeHtml(focus.toLowerCase())} into an experience that can be entered, tested and discussed. The work develops through research, prototyping and visual documentation.`}</p></div></section>
-      ${paper ? `<section class="project-copy"><h2>Research question</h2><div><p>${escapeHtml(paper.question)}</p><p class="project-cn" lang="zh-CN">${escapeHtml(paper.questionCn)}</p></div></section><section class="project-copy project-copy--findings"><h2>Key findings</h2><div><p>${escapeHtml(paper.findings)}</p><p class="project-cn" lang="zh-CN">${escapeHtml(paper.findingsCn)}</p></div></section>${renderStudyDesign(paper, id)}${renderPaperMedia(paper, id)}` : ""}
+      <section class="project-copy">${paper ? sectionHeading("01", "Overview") : "<h2>Overview</h2>"}<div><p>${escapeHtml(description)}</p><p>${paper ? escapeHtml(longCopy) : `The project brings ${escapeHtml(focus.toLowerCase())} into an experience that can be entered, tested and discussed. The work develops through research, prototyping and visual documentation.`}</p></div></section>
+      ${paper ? `<section class="project-copy">${sectionHeading("02", "Research question")}<div><p>${escapeHtml(paper.question)}</p><p class="project-cn" lang="zh-CN">${escapeHtml(paper.questionCn)}</p></div></section><section class="project-copy project-copy--findings">${sectionHeading("03", "Key findings")}<div><p>${escapeHtml(paper.findings)}</p><p class="project-cn" lang="zh-CN">${escapeHtml(paper.findingsCn)}</p></div></section>${renderFinalPaperSections(paper, id)}` : ""}
       ${videos[id] ? `<section class="project-videos" aria-label="${escapeHtml(title)} videos">${videos[id].map(([videoId,label]) => `<figure class="project-video"><iframe src="https://www.youtube-nocookie.com/embed/${videoId}" title="${escapeHtml(title)} — ${escapeHtml(label)}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe><figcaption class="project-caption">${escapeHtml(label)}</figcaption></figure>`).join("")}</section>` : ""}
       ${gallery.length ? `<section class="project-gallery ${id === "community-feedback-vibe-coding" ? "project-gallery--research" : "project-gallery--pair"}" aria-label="Project documentation">${gallery.map((src,index) => `<figure><img src="${src}" alt="${escapeHtml(title)} documentation ${index + 1}" loading="lazy"><figcaption class="project-caption">Project documentation ${String(index + 1).padStart(2,"0")}.</figcaption></figure>`).join("")}</section>` : ""}
       ${portfolio.length ? `<section class="portfolio-series"><header><div><h2>Portfolio series</h2><p>Original full-resolution spreads</p></div><p>Drag or scroll horizontally / 左右滑动</p></header><div class="portfolio-rail" tabindex="0" aria-label="${escapeHtml(title)} portfolio images">${portfolio.map((src,index) => `<figure><img src="${src}" alt="${escapeHtml(title)} portfolio spread ${index + 1}" loading="lazy" draggable="false"><figcaption class="project-caption">${String(index + 1).padStart(2,"0")} / ${String(portfolio.length).padStart(2,"0")}</figcaption></figure>`).join("")}</div></section>` : ""}
@@ -108,12 +116,12 @@ if (!selectedProject) {
   main.querySelectorAll(".project-nav a").forEach(link => {
     const label = link.textContent;
     link.setAttribute("aria-label", label);
-    link.innerHTML = Array.from(label).map(char => `<span class="project-nav-char">${char === " " ? "&nbsp;" : escapeHtml(char)}</span>`).join("");
-    const reset = () => link.querySelectorAll(".project-nav-char").forEach(char => char.style.transform = "");
-    link.addEventListener("pointermove", event => link.querySelectorAll(".project-nav-char").forEach(char => {
-      const rect = char.getBoundingClientRect();
-      const distance = (rect.left + rect.width / 2) - event.clientX;
-      char.style.transform = Math.abs(distance) < 54 ? `translateX(${Math.sign(distance || 1) * (54 - Math.abs(distance)) * .38}px)` : "";
+    link.innerHTML = label.split(/(\s+)/).map(part => /^\s+$/.test(part) ? " " : `<span class="project-nav-word">${escapeHtml(part)}</span>`).join("");
+    const reset = () => link.querySelectorAll(".project-nav-word").forEach(word => word.style.transform = "");
+    link.addEventListener("pointermove", event => link.querySelectorAll(".project-nav-word").forEach(word => {
+      const rect = word.getBoundingClientRect();
+      const center = rect.left + rect.width / 2;
+      word.style.transform = `translateX(${center < event.clientX ? -38 : 38}px)`;
     }));
     link.addEventListener("pointerleave", reset);
     link.addEventListener("blur", reset);
