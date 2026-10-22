@@ -1,5 +1,5 @@
 const media = {
-  "community-feedback-vibe-coding": ["gallery/research-finding.webp"],
+  "community-feedback-vibe-coding": [],
   "poopslaves": ["gallery/outcome-01.webp","gallery/outcome-02.webp","gallery/outcome-03.webp","gallery/outcome-04.webp","gallery/outcome-05.webp"],
   "value-machine": ["gallery/outcome-01.webp","gallery/outcome-02.webp","gallery/outcome-03.webp","gallery/outcome-04.webp","gallery/outcome-05.webp","gallery/outcome-06.webp","gallery/outcome-07.webp"],
   "plantievers-illusion": ["cover/detail-hero.webp","gallery/outcome-01.webp","gallery/outcome-02.webp","gallery/outcome-03.webp","gallery/outcome-04.webp","gallery/outcome-05.webp","gallery/outcome-07.webp","gallery/outcome-08.webp","gallery/outcome-09.webp"],
@@ -47,7 +47,6 @@ const papers = {
     findingsCn: "社区意见不仅提供修改建议，也会拓展创作者的选择空间、帮助表达尚未成形的意图、通过同伴案例重新校准可行性，并促使创作者判断何时以及如何回应既有讨论。",
     mediaLabel: "Project workflow / 项目流程图",
     image: "workflow.png",
-    manuscriptImage: "gallery/comment-synthesis.webp",
     pages: 35
   },
   "sketches-as-previews": {
