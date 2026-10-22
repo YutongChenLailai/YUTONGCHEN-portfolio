@@ -14,7 +14,7 @@
 .project-video { margin: 0; }
 .project-video iframe { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; background: #000; }
 .project-copy--findings { padding-top:0; }
-.paper-media { margin:0 0 clamp(64px,9vw,130px); border-top:1px solid #cfcfcf; padding-top:16px; }
+.paper-media { margin:0 0 clamp(64px,9vw,130px); padding-top:16px; }
 .paper-media h2 { margin:0 0 18px; font-size:16px; font-weight:400; }
 .paper-media--workflow img { display:block; width:100%; height:auto; background:#fff; }
 .paper-scroll-reader { width:min(360px,100%); height:min(56vh,520px); overflow-y:auto; overscroll-behavior:contain; background:#fff; scrollbar-width:thin; scrollbar-color:rgba(0,0,0,.18) transparent; }
@@ -29,6 +29,8 @@
 .project-gallery { display: grid; gap: 8px; }
 .project-gallery--pair { grid-template-columns: repeat(2,minmax(0,1fr)); }
 .project-gallery--pair figure:last-child:nth-child(odd) { grid-column: 1 / -1; }
+.project-gallery--research { gap:clamp(32px,5vw,72px); margin-bottom:clamp(64px,9vw,130px); }
+.project-gallery--research img { width:100%; height:auto; object-fit:contain; }
 .portfolio-series { padding: clamp(64px,8vw,110px) 0; overflow: hidden; }
 .portfolio-series header { display: flex; justify-content: space-between; gap: 24px; align-items: end; margin-bottom: 22px; }
 .portfolio-series h2, .portfolio-series p { margin: 0; }
@@ -38,7 +40,7 @@
 .portfolio-rail.is-dragging { scroll-snap-type: none; }
 .portfolio-rail figure { flex: 0 0 min(88vw,1620px); margin: 0; scroll-snap-align: start; }
 .portfolio-rail img { display: block; width: 100%; height: auto; }
-.project-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding: clamp(58px,7vw,96px) 0; border-top: 1px solid #cfcfcf; }
+.project-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding: clamp(58px,7vw,96px) 0; }
 .project-nav a { font-size: clamp(24px,3vw,42px); line-height: 1.05; letter-spacing: -.035em; }
 .project-nav a:last-child { text-align: right; }
 .project-nav-char { display: inline-block; transition: transform 180ms cubic-bezier(.22,.61,.36,1); }
