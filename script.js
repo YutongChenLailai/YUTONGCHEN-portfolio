@@ -23,7 +23,8 @@ if (grid) {
     card.className = `project project-${index + 1}`;
     card.href = detailBase + slug;
     const extension = slug === "closet-x" || slug === "drown-in-algae" ? "jpg" : "webp";
-    card.innerHTML = `<img src="assets/projects/${slug}.${extension}" alt="${title}" loading="${index < 3 ? "eager" : "lazy"}"><span class="meta"><strong>${title}</strong><span class="description">${copy}</span><span class="category">${medium}</span><span class="year">${year}</span></span>`;
+    const imageName = slug === "community-feedback-vibe-coding" ? "community-feedback-vibe-coding-20261022.webp" : `${slug}.${extension}`;
+    card.innerHTML = `<img src="assets/projects/${imageName}" alt="${title}" loading="${index < 3 ? "eager" : "lazy"}"><span class="meta"><strong>${title}</strong><span class="description">${copy}</span><span class="category">${medium}</span><span class="year">${year}</span></span>`;
     grid.append(card);
   });
 
