@@ -19,7 +19,7 @@
 .project-videos--2{grid-template-columns:repeat(2,minmax(0,1fr))}
 .project-videos--3{grid-template-columns:repeat(3,minmax(0,1fr))}
 .project-video { margin: 0; }
-.project-video iframe { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; background: #000; }
+.project-video iframe,.project-video img { display:block;width:100%;aspect-ratio:16/9;border:0;object-fit:cover;background:#000; }
 .project-copy--findings { padding-top:0; }
 .paper-media { margin:0 0 clamp(64px,9vw,130px); padding-top:16px; }
 .paper-media h2 { margin:0 0 18px; font-size:16px; font-weight:400; }
