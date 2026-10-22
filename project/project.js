@@ -69,7 +69,7 @@ const projectCatalogue = window.portfolioProjects || [];
 const projectIndex = projectCatalogue.findIndex(item => item[1] === slug);
 const selectedProject = projectCatalogue[projectIndex];
 const escapeHtml = value => String(value).replace(/[&<>"']/g, char => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[char]);
-const sectionHeading = (number, title) => `<h2><span class="section-number">${number}</span><span>${title}</span></h2>`;
+const sectionHeading = (_number, title) => `<h2>${title}</h2>`;
 const renderStudyDesign = (paper, id) => `<section class="project-copy project-copy--study">${sectionHeading("04", "Study design")}<div class="${paper.image ? "covibe-study-layout" : ""}"><div><p>${escapeHtml(paper.methods)}</p><p class="project-cn" lang="zh-CN">${escapeHtml(paper.methodsCn)}</p></div>${paper.image ? `<img src="../assets/details/${id}/paper/${paper.image}" alt="${escapeHtml(paper.mediaLabel)}" loading="lazy" decoding="async">` : ""}</div></section>`;
 const renderPaperMedia = (paper, id) => paper.pages
   ? `<section class="project-copy project-copy--manuscript" aria-label="Research manuscript">${sectionHeading("05", "Research manuscript")}<div class="${paper.manuscriptImage ? "covibe-manuscript-row" : ""}">${paper.manuscriptImage ? `<img src="../assets/details/${id}/${paper.manuscriptImage}" alt="${escapeHtml(paper.title)} comment synthesis" loading="lazy" decoding="async">` : ""}<div class="paper-scroll-reader" tabindex="0" aria-label="Scrollable research manuscript">${Array.from({length:paper.pages}, (_,index) => `<img src="../assets/details/${id}/paper/pages/page-${String(index + 1).padStart(2,"0")}.jpg" alt="${escapeHtml(paper.title)} page ${index + 1}" loading="lazy" decoding="async" fetchpriority="low">`).join("")}</div></div></section>`
@@ -106,7 +106,7 @@ if (!selectedProject) {
       <figure class="project-hero ${id === "sketches-as-previews" ? "project-hero--contained" : ""}"><img src="${hero}" alt="${escapeHtml(title)} project image" fetchpriority="high" decoding="async"><figcaption class="project-caption">${escapeHtml(title)} — project documentation.</figcaption></figure>
       <section class="project-copy">${paper ? sectionHeading("01", "Overview") : "<h2>Overview</h2>"}<div><p>${escapeHtml(description)}</p><p>${paper ? escapeHtml(longCopy) : `The project brings ${escapeHtml(focus.toLowerCase())} into an experience that can be entered, tested and discussed. The work develops through research, prototyping and visual documentation.`}</p></div></section>
       ${paper ? `<section class="project-copy">${sectionHeading("02", "Research question")}<div><p>${escapeHtml(paper.question)}</p><p class="project-cn" lang="zh-CN">${escapeHtml(paper.questionCn)}</p></div></section><section class="project-copy project-copy--findings">${sectionHeading("03", "Key findings")}<div><p>${escapeHtml(paper.findings)}</p><p class="project-cn" lang="zh-CN">${escapeHtml(paper.findingsCn)}</p></div></section>${renderFinalPaperSections(paper, id)}` : ""}
-      ${videos[id] ? `<section class="project-videos" aria-label="${escapeHtml(title)} videos">${videos[id].map(([videoId,label]) => `<figure class="project-video"><iframe src="https://www.youtube-nocookie.com/embed/${videoId}" title="${escapeHtml(title)} — ${escapeHtml(label)}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe><figcaption class="project-caption">${escapeHtml(label)}</figcaption></figure>`).join("")}</section>` : ""}
+      ${videos[id] ? `<section class="project-videos project-videos--${Math.min(videos[id].length, 3)}" aria-label="${escapeHtml(title)} videos">${videos[id].map(([videoId,label]) => `<figure class="project-video"><iframe src="https://www.youtube-nocookie.com/embed/${videoId}" title="${escapeHtml(title)} — ${escapeHtml(label)}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe><figcaption class="project-caption">${escapeHtml(label)}</figcaption></figure>`).join("")}</section>` : ""}
       ${gallery.length ? `<section class="project-gallery ${id === "community-feedback-vibe-coding" ? "project-gallery--research" : "project-gallery--pair"}" aria-label="Project documentation">${gallery.map((src,index) => `<figure><img src="${src}" alt="${escapeHtml(title)} documentation ${index + 1}" loading="lazy"><figcaption class="project-caption">Project documentation ${String(index + 1).padStart(2,"0")}.</figcaption></figure>`).join("")}</section>` : ""}
       ${portfolio.length ? `<section class="portfolio-series"><header><div><h2>Portfolio series</h2><p>Original full-resolution spreads</p></div><p>Drag or scroll horizontally / 左右滑动</p></header><div class="portfolio-rail" tabindex="0" aria-label="${escapeHtml(title)} portfolio images">${portfolio.map((src,index) => `<figure><img src="${src}" alt="${escapeHtml(title)} portfolio spread ${index + 1}" loading="lazy" draggable="false"><figcaption class="project-caption">${String(index + 1).padStart(2,"0")} / ${String(portfolio.length).padStart(2,"0")}</figcaption></figure>`).join("")}</div></section>` : ""}
       ${paper ? "" : `<section class="project-copy"><h2>Process</h2><div><p>${escapeHtml(format)} is used as a way to examine ${escapeHtml(focus.toLowerCase())} through direct experience.</p><p>The final outcome connects the project’s research question with a concrete interaction, allowing its ideas to be encountered rather than only described.</p></div></section>`}
@@ -116,12 +116,12 @@ if (!selectedProject) {
   main.querySelectorAll(".project-nav a").forEach(link => {
     const label = link.textContent;
     link.setAttribute("aria-label", label);
-    link.innerHTML = label.split(/(\s+)/).map(part => /^\s+$/.test(part) ? " " : `<span class="project-nav-word">${escapeHtml(part)}</span>`).join("");
-    const reset = () => link.querySelectorAll(".project-nav-word").forEach(word => word.style.transform = "");
-    link.addEventListener("pointermove", event => link.querySelectorAll(".project-nav-word").forEach(word => {
-      const rect = word.getBoundingClientRect();
+    link.innerHTML = label.split(/(\s+)/).map(part => /^\s+$/.test(part) ? " " : `<span class="project-nav-word">${Array.from(part).map(char => `<span class="project-nav-char">${escapeHtml(char)}</span>`).join("")}</span>`).join("");
+    const reset = () => link.querySelectorAll(".project-nav-char").forEach(char => char.style.transform = "");
+    link.addEventListener("pointermove", event => link.querySelectorAll(".project-nav-char").forEach(char => {
+      const rect = char.getBoundingClientRect();
       const center = rect.left + rect.width / 2;
-      word.style.transform = `translateX(${center < event.clientX ? -38 : 38}px)`;
+      char.style.transform = `translateX(${center < event.clientX ? -28 : 28}px)`;
     }));
     link.addEventListener("pointerleave", reset);
     link.addEventListener("blur", reset);
