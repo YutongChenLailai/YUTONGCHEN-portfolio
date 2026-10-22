@@ -20,7 +20,7 @@ const grid = document.querySelector(".work-grid");
 if (grid) {
   projects.forEach(([title, slug, copy, medium, year], index) => {
     const card = document.createElement("a");
-    card.className = `project project-${index + 1}`;
+    card.className = `project project-${index + 1}${slug === "sketches-as-previews" ? " project--contained" : ""}`;
     card.href = detailBase + slug;
     const extension = slug === "closet-x" || slug === "drown-in-algae" ? "jpg" : "webp";
     const imageName = slug === "community-feedback-vibe-coding" ? "community-feedback-vibe-coding-20261022.webp" : `${slug}.${extension}`;
