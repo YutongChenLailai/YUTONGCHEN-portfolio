@@ -9,9 +9,10 @@
 .project-meta dt, .project-meta dd { margin: 0; }
 .project-hero, .project-gallery figure { margin: 0; }
 .project-hero img, .project-gallery img { display: block; width: 100%; height: auto; }
-.project-hero--contained { display:grid;place-items:center;background:#fff;padding:clamp(28px,6vw,96px); }
+.project-hero--contained { display:grid;place-items:center;background:#fff;padding:18px 0 24px; }
 .project-hero--contained img { width:min(68%,960px);max-height:68vh;object-fit:contain; }
-.project-hero--contained figcaption { width:100%; }
+.project-hero--contained figcaption { width:min(68%,960px);margin:8px auto 0;text-align:center; }
+.project-hero--contained + .project-copy { padding-top:clamp(24px,3vw,42px); }
 .project-caption { margin: 8px 0 0; color: #666; font-size: 13px; line-height: 1.3; }
 .project-videos { display:grid;gap:8px;margin-bottom:8px;align-items:start; }
 .project-videos--1{grid-template-columns:minmax(0,calc(50% - 4px))}
@@ -77,8 +78,9 @@
   .project-copy { gap: 18px; padding: 56px 0; }
   .covibe-manuscript-row,.paper-sections-row { grid-template-columns:1fr; }
   .covibe-manuscript-row .paper-scroll-reader{width:min(280px,100%)}
-  .project-hero--contained { padding:24px 12px; }
+  .project-hero--contained { padding:12px 0 18px; }
   .project-hero--contained img { width:88%;max-height:72vh; }
+  .project-hero--contained figcaption { width:88%; }
   .project-copy p { font-size: 20px; }
   .project-videos--1,.project-videos--2,.project-videos--3{grid-template-columns:1fr}
   .project-gallery--pair { grid-template-columns: 1fr; }
