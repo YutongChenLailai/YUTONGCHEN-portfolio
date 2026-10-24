@@ -92,3 +92,17 @@
   .portfolio-rail figure { flex-basis: calc(100vw - 16px); }
   .project-nav { padding: 52px 0; }
 }
+
+.project-copy p{line-height:1.5}
+.project-copy p.project-cn{font-size:16px;line-height:1.65}
+.project-copy h3{margin:30px 0 14px;font-size:22px;font-weight:500;line-height:1.35}
+.project-copy h3:first-child{margin-top:0}
+.research-link{display:block;width:fit-content;margin:14px 0 24px;text-decoration:underline;text-underline-offset:5px;overflow-wrap:anywhere}
+.research-figure{margin:32px 0}
+.research-figure img{display:block;width:100%;height:auto}
+.research-figure figcaption{font-size:13px;line-height:1.5;color:#727272;margin-top:10px}
+
+.project-copy p{white-space:pre-line}
+
+.project-copy p{font-weight:400}
+.project-copy p.project-cn{color:#555;font-weight:400}
