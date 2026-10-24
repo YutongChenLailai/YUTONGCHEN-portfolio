@@ -1,4 +1,4 @@
-// Project text checked against manuscripts, conference posters, and existing project documentation.
+// Project text checked against manuscripts, published C&C full texts, conference posters, and existing project documentation.
 window.portfolioDetails = {
   "community-feedback-vibe-coding": {
     "sections": [
@@ -567,12 +567,12 @@ window.portfolioDetails = {
           {
             "heading": false,
             "lang": "en",
-            "text": "How can a speculative interactive system make bodily commodification and unequal value extraction experientially legible?"
+            "text": "This paper asks whether a speculative interactive system can make bodily commodification and unequal value extraction experientially legible. More specifically, it asks how abstract socio-economic dynamics can be translated into a perceivable environment, how grotesque imagery can support critique without collapsing into pure spectacle, and how interaction can be designed so that participants remain active at the local level while being denied command over the larger system."
           },
           {
             "heading": false,
             "lang": "zh-CN",
-            "text": "推测性交互系统如何让身体商品化与不平等价值抽取成为可被体验和理解的过程？"
+            "text": "本文探讨推测性交互系统能否让身体商品化与不平等价值抽取成为可被体验和理解的过程。具体而言：如何将抽象的社会经济动态转化为可感知的环境？怪诞图像如何支持批判，而不沦为纯粹奇观？如何设计交互，使参与者在局部保持行动能力，却无法掌控更大的系统？"
           },
           {
             "heading": true,
@@ -812,8 +812,8 @@ window.portfolioDetails = {
             "text": "Google Scholar / 论文索引 ↗"
           },
           {
-            "href": "https://doi.org/10.1145/3803784.3816865",
-            "text": "Publisher / 出版社页面 ↗"
+            "href": "https://dl.acm.org/doi/full/10.1145/3803784.3816865",
+            "text": "Published full text / 正式论文全文 ↗"
           },
           {
             "text": "Find AIVRID publication / 检索 AIVRID 论文 ↗",
@@ -854,7 +854,7 @@ window.portfolioDetails = {
           {
             "heading": true,
             "lang": null,
-            "text": "ACM Creativity & Cognition 2026 · Poster"
+            "text": "ACM Creativity & Cognition 2026 · Published poster paper"
           },
           {
             "heading": false,
@@ -920,12 +920,12 @@ window.portfolioDetails = {
           {
             "heading": false,
             "lang": "en",
-            "text": "The C&C poster contributes a work-in-progress model combining rule-based worldbuilding, decoupled feedback, and constrained agency. Its preliminary demonstration observations are distinct from the HCII study. Further observation and interviews are proposed to examine interpretation."
+            "text": "The published C&C paper contributes a four-layer model of production, transfer, valuation, and absorption; a dual-screen Unreal Engine 5–TouchDesigner implementation linked through OSC; and a distinction between agency of action and agency of outcome. This version uses desktop mouse input; large or spherical screens document the display setting, not full-body input. Informal showings and exploratory participant feedback revealed a tension between local operational clarity and partially opaque system-level accumulation. They are not a formal usability evaluation. Future work targets onboarding, feedback cues, structured observation, and interviews."
           },
           {
             "heading": false,
             "lang": "zh-CN",
-            "text": "C&C 海报提出一个结合规则世界构建、反馈解耦与受限能动性的进行中设计模型；其初步展示观察与 HCII 研究分别呈现。后续拟通过进一步观察与访谈考察参与者的解释过程。"
+            "text": "正式 C&C 论文贡献包括生产、转移、估值与吸收的四层模型，通过 OSC 连接 Unreal Engine 5 与 TouchDesigner 的双屏实现，以及行动能动性与结果能动性的区分。该版本采用桌面鼠标输入；大屏或球幕属于展示情境，不代表全身输入。非正式展示与探索性参与者反馈揭示了局部操作清晰、系统层累积关系却仍部分不透明的张力，不能视为正式可用性评估。后续研究将改进引导和反馈线索，并开展结构化观察与访谈。"
           },
           {
             "heading": false,
@@ -1161,12 +1161,12 @@ window.portfolioDetails = {
           {
             "heading": false,
             "lang": "en",
-            "text": "A pilot study involved 12 Chinese viewers familiar with auspicious imagery. Participants viewed the moving-image work and installation documentation, then provided short written and verbal responses. The conference poster reports slowed recognition, symbolic tension, and environmental pressure: viewers recognized the familiar pine, while bodily juxtaposition, pacing, sound, and spatial arrangement unsettled its usual reading."
+            "text": "The published paper reports a pilot interview study with 12 Chinese participants familiar with auspicious imagery, recruited through Xiaohongshu, university networks, and referrals. After viewing the work and installation documentation, participants gave written and verbal responses. Repeated reading and lightweight thematic grouping identified slowed recognition, symbolic tension, and environmental pressure; the analysis did not use formal qualitative coding."
           },
           {
             "heading": false,
             "lang": "zh-CN",
-            "text": "探索性研究邀请 12 位熟悉吉祥图像的中国观众观看动态影像与装置记录，并收集简短书面及口头回应。会议海报报告了延缓识别、符号张力与环境压力三个初步主题：观众仍能认出松树，但身体并置、节奏、声音与空间安排扰动了通常的解读。"
+            "text": "正式论文报告了一项 12 人探索性访谈研究，参与者均为熟悉吉祥图像的中国观众，通过小红书、大学网络与熟人转介招募。观看作品及装置记录后，参与者提供书面和口头回应。作者通过反复阅读与轻量主题归组，识别出延缓识别、符号张力和环境压力；该分析没有采用正式质性编码。"
           }
         ],
         "title": "Study & preliminary findings"
@@ -1177,12 +1177,12 @@ window.portfolioDetails = {
           {
             "heading": false,
             "lang": "en",
-            "text": "The work contributes a practice-based inquiry into how slowed pacing, superimposition, bodily juxtaposition, and spatial staging can reopen inherited meaning. The small pilot provides exploratory accounts of interpretation; it does not establish a general or lasting change in viewers’ beliefs."
+            "text": "The paper contributes a culturally specific case of reflective design, installation as a mode of inquiry, and an account of lightweight digital mediation. Its small, culturally specific sample was uneven across age and disciplinary background. It cannot establish how viewers unfamiliar with Chinese auspicious imagery would respond. Future work proposes comparative screen-based and installed viewing, a more structured audience protocol, and broader cultural recruitment."
           },
           {
             "heading": false,
             "lang": "zh-CN",
-            "text": "项目通过实践研究，讨论缓慢节奏、叠化、身体并置与空间呈现如何重新打开既有文化含义。小规模试验提供了对观看与解释过程的探索性认识，不能据此确定普遍或持久的观念改变。"
+            "text": "论文贡献包括文化特定的反思性设计案例、以装置作为研究方式，以及轻量数字媒介如何支持反思的实践认识。样本规模小，具有特定文化背景，年龄和专业分布不均，不能确定不熟悉中国吉祥图像的观众会如何回应。后续研究拟比较屏幕观看与完整装置情境，采用更有结构的观众研究流程，并拓展文化背景。"
           }
         ],
         "title": "Contribution & scope"
@@ -1210,8 +1210,8 @@ window.portfolioDetails = {
             "text": "Google Scholar / 论文索引 ↗"
           },
           {
-            "href": "https://doi.org/10.1145/3803784.3816864",
-            "text": "Publisher / 出版社页面 ↗"
+            "href": "https://dl.acm.org/doi/full/10.1145/3803784.3816864",
+            "text": "Published full text / 正式论文全文 ↗"
           }
         ],
         "paragraphs": [
@@ -1223,7 +1223,7 @@ window.portfolioDetails = {
           {
             "heading": true,
             "lang": null,
-            "text": "ACM Creativity & Cognition 2026 · Poster"
+            "text": "ACM Creativity & Cognition 2026 · Published poster paper"
           },
           {
             "heading": false,
