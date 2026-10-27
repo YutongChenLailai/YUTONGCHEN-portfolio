@@ -48,3 +48,5 @@
   .about-row--new-period:not(:first-child) { margin-top: 14px; }
   .about-body .site-header a { font-size: 16px; }
 }
+
+.education-proof{margin-top:12px;padding-top:10px;border-top:1px solid #cfcfcf}.education-proof summary{color:#111}.education-proof-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:14px}.education-proof-grid figure{margin:0;min-width:0}.education-proof-grid figure>a{display:block}.education-proof-grid img{display:block;width:100%;max-width:none;height:auto;margin:0;background:#f1f1f1}.education-proof-grid figcaption{margin-top:6px;color:#727272;font-size:.85em}.education-proof-grid a:focus-visible{outline:2px solid #111;outline-offset:3px}@media(max-width:700px){.education-proof-grid{grid-template-columns:1fr}}
