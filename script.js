@@ -24,7 +24,7 @@ if (grid) {
     card.href = detailBase + slug;
     const extension = slug === "closet-x" || slug === "drown-in-algae" ? "jpg" : "webp";
     const imageName = slug === "community-feedback-vibe-coding" ? "community-feedback-vibe-coding-20261022.webp" : `${slug}.${extension}`;
-    card.innerHTML = `<img src="assets/projects/${imageName}" alt="${title}" loading="${index < 3 ? "eager" : "lazy"}"><span class="meta"><strong>${title}</strong><span class="description">${copy}</span><span class="category">${medium}</span><span class="year">${year}</span></span>`;
+    card.innerHTML = `<img src="assets/projects/${imageName}?v=white-covers-20261027" alt="${title}" loading="${index < 3 ? "eager" : "lazy"}"><span class="meta"><strong>${title}</strong><span class="description">${copy}</span><span class="category">${medium}</span><span class="year">${year}</span></span>`;
     grid.append(card);
   });
 

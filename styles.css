@@ -70,3 +70,7 @@ html, body, body * { cursor: none !important; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition-duration: .01ms !important; }
 }
+
+/* Research covers already include white padding; keep their original proportions. */
+img[src*="community-feedback-vibe-coding"][src*=".webp"],img[src*="sketches-as-previews"][src*=".webp"]{object-fit:contain!important;background:#fff!important}
+.project--contained>img{padding:0}
