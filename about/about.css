@@ -81,8 +81,6 @@
 .about-identity{grid-template-columns:minmax(280px,.85fr) minmax(0,1.4fr);gap:clamp(32px,5vw,72px);align-items:start;margin-bottom:36px}
 .about-name{gap:20px}.about-name p{line-height:1.45;margin-top:10px}
 .about-name .profile-location{font-size:14px;color:#727272;margin-top:12px}
-.profile-links{display:flex;flex-wrap:wrap;gap:10px 20px;margin-top:24px;font-size:16px}
-.about-profile>.about-action{display:inline-block;margin-top:18px;font-size:16px}
 .contact-heading{font-size:16px;font-weight:500;margin:0 0 14px!important}
 .about-contact{gap:0}.about-contact>div{grid-template-columns:minmax(160px,43%) minmax(0,1fr);gap:20px;padding:10px 0;border-top:1px solid #e7e7e7;align-items:center}
 .about-contact dt{font-size:14px;line-height:1.35;color:#666}.about-contact dt span{display:block;margin-top:3px;font-size:12px;color:#888}
@@ -93,4 +91,19 @@
 .award-certificate summary:hover .disclosure-arrow{transform:translateY(2px)}
 .award-certificate[open] summary:hover .disclosure-arrow{transform:rotate(180deg) translateY(2px)}
 @media(max-width:850px){.about-identity{grid-template-columns:1fr;gap:30px}.about-contact>div{grid-template-columns:minmax(140px,38%) minmax(0,1fr)}}
-@media(max-width:480px){.about-contact>div{grid-template-columns:1fr;gap:6px;padding:12px 0}.about-contact dt span{display:inline;margin-left:8px}.profile-links{margin-top:18px}.about-contact dd{font-size:17px}}
+@media(max-width:480px){.about-contact>div{grid-template-columns:1fr;gap:6px;padding:12px 0}.about-contact dt span{display:inline;margin-left:8px}.about-contact dd{font-size:17px}}
+
+/* Align the portrait and contact block, with no duplicate navigation. */
+@media(min-width:1051px){
+ .about-identity{grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:40px;align-items:stretch}
+ .about-profile,.about-name{height:340px}
+ .about-name{gap:20px;align-items:flex-start}
+ .about-name .profile-photo{width:272px!important;height:340px!important}
+ .about-name .profile-name-copy{flex:1}
+ .about-contact-group{height:340px;display:flex;flex-direction:column;gap:0}
+ .about-contact{flex:1;display:grid;grid-template-rows:repeat(5,minmax(0,1fr))}
+ .about-contact>div{padding:7px 0;grid-template-columns:minmax(150px,40%) minmax(0,1fr);gap:16px}
+}
+@media(min-width:851px) and (max-width:1050px){.about-identity{grid-template-columns:1fr}.about-name .profile-photo{width:192px!important;height:240px!important}}
+@media(max-width:850px){.about-name .profile-photo{width:160px!important;height:200px!important}}
+@media(max-width:480px){.about-name .profile-photo{width:128px!important;height:160px!important}}
