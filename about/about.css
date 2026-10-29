@@ -112,3 +112,9 @@
 .about-identity{grid-template-columns:1fr}
 .about-contact-section .about-contact{display:grid;width:100%;max-width:920px;grid-template-rows:none}
 .about-contact-section .about-contact>div{padding:12px 0}
+
+/* Place the existing biography beside the portrait at the top. */
+.about-identity>.about-biography-section{margin-top:0;min-width:0}
+.about-identity>.about-biography-section>h2{border-top:0;padding-top:0}
+.about-identity .about-biography{line-height:1.45}
+@media(min-width:1051px){.about-identity{grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:40px;align-items:start}}
