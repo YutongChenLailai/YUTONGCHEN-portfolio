@@ -56,3 +56,23 @@
 .education-documents a{display:block;max-width:100%;width:280px}
 .education-evidence .education-documents img{display:block;width:100%;height:auto;margin:0}
 .education-entry{min-width:0}.education-entry>p{margin:0}
+
+/* Use the header icon weight and a visible target for every certificate disclosure. */
+.award-certificate summary{display:block;min-height:36px;width:fit-content;max-width:100%;box-sizing:border-box;padding:6px 42px 6px 8px;cursor:pointer;border-radius:3px;transition:background-color 160ms ease,color 160ms ease}
+.award-certificate summary::after{content:none}
+.disclosure-arrow{position:absolute;right:8px;top:6px;display:block;width:24px;height:24px;transition:transform 160ms ease;pointer-events:none}
+.award-certificate[open] .disclosure-arrow{transform:rotate(180deg)}
+.award-certificate summary:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+.profile-photo{display:block;width:100px!important;height:125px!important;object-fit:contain;background:#fff;flex:none}
+@media(prefers-reduced-motion:reduce){.award-certificate summary,.disclosure-arrow{transition:none}}
+
+.award-certificate summary:hover,.award-certificate summary:focus-visible{background:#111;color:#fff}
+.about-name{display:flex;align-items:flex-start;gap:20px;min-width:0}
+.profile-name-copy{min-width:0}
+.about-biography{grid-template-columns:minmax(0,1fr);max-width:920px}
+.about-contact-group{grid-template-columns:1fr}
+.about-contact{gap:10px}
+.about-contact div{grid-template-columns:minmax(160px,44%) minmax(0,1fr);gap:12px}
+.about-contact dt{color:#727272;font-size:14px;line-height:1.45}
+.about-contact dd{line-height:1.45}
+@media(max-width:700px){.about-contact div{grid-template-columns:1fr;gap:2px}.about-name{gap:16px}.profile-photo{width:80px!important;height:100px!important}}
