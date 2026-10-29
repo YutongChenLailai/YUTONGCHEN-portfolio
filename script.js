@@ -118,11 +118,16 @@ if (cursor && matchMedia("(pointer:fine)").matches) {
 
 // Mouse users preview certificates on hover; native tap and keyboard toggles remain available.
 for (const details of document.querySelectorAll('.award-certificate')) {
+  let hoverTimer;
+  const schedule = (open, delay) => {
+    clearTimeout(hoverTimer);
+    hoverTimer = setTimeout(() => { details.open = open; }, delay);
+  };
   details.addEventListener('pointerenter', event => {
-    if (event.pointerType === 'mouse') details.open = true;
+    if (event.pointerType === 'mouse') schedule(true, 90);
   });
   details.addEventListener('pointerleave', event => {
-    if (event.pointerType === 'mouse') details.open = false;
+    if (event.pointerType === 'mouse') schedule(false, 120);
   });
   details.addEventListener('focusin', event => {
     if (event.target.matches(':focus-visible')) details.open = true;

@@ -132,3 +132,17 @@
 @media(max-width:600px){.about-name{display:block}.about-name .profile-photo{width:128px!important;height:160px!important;margin-bottom:20px}.profile-name-copy .about-biography-section{margin-top:24px}}
 @media(min-width:851px){.about-row,.about-contact-section .about-contact>div{grid-template-columns:272px minmax(0,1fr);gap:24px}}
 @media(min-width:601px) and (max-width:850px){.about-row,.about-contact-section .about-contact>div{grid-template-columns:160px minmax(0,1fr);gap:24px}}
+/* Two consistent type sizes; the biography finishes at the portrait baseline. */
+.about-page{font-size:16px;line-height:1.45}
+.about-page h1,.about-page h2{font-size:18px}
+.about-page .about-cn,.about-page [lang="zh-CN"],.about-name h1 span,.about-name .profile-location,.about-contact dt,.about-contact dt span,.about-contact dd{font-size:16px!important;line-height:1.45}
+@media(min-width:851px){.profile-name-copy{min-height:340px;display:flex;flex-direction:column}.profile-name-copy .about-biography-section{margin-top:auto;padding-top:16px}.about-name .profile-photo{height:340px!important;width:272px!important}}
+@media(hover:hover) and (pointer:fine){
+ .award-certificate{position:relative;width:fit-content;max-width:100%}
+ .award-certificate>a,.award-certificate>.education-documents{position:absolute;left:0;top:100%;z-index:60;box-sizing:border-box;width:min(480px,calc(100vw - 340px));max-height:70vh;overflow:auto;padding:14px;margin:0;background:#fff;border:1px solid #ddd;box-shadow:0 8px 28px #00000014;animation:evidence-reveal 160ms ease-out}
+ .award-certificate>a>img{width:100%;margin:0}
+ .award-certificate>.education-documents a{width:100%}
+ @keyframes evidence-reveal{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+}
+@media(prefers-reduced-motion:reduce){.award-certificate>a,.award-certificate>.education-documents{animation:none!important}}
+@media(min-width:851px){.about-name .profile-photo{align-self:end}}
