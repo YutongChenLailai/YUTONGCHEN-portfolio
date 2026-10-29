@@ -107,3 +107,8 @@
 @media(max-width:480px){.about-name .profile-photo{width:128px!important;height:160px!important}}
 
 .about-body .cursor.is-action{width:28px;height:28px;margin:-14px 0 0 -14px;background:#ffff18;mix-blend-mode:multiply}
+
+/* Keep contact details as the final About section. */
+.about-identity{grid-template-columns:1fr}
+.about-contact-section .about-contact{display:grid;width:100%;max-width:920px;grid-template-rows:none}
+.about-contact-section .about-contact>div{padding:12px 0}
