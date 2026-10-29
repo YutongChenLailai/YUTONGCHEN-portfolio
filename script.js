@@ -78,7 +78,7 @@ if (cursor && matchMedia("(pointer:fine)").matches) {
   addEventListener("pointermove", event => {
     cursor.style.transform = `translate3d(${event.clientX}px,${event.clientY}px,0)`;
     cursor.classList.add("show");
-    cursor.classList.toggle("is-action", Boolean(event.target.closest("a,button")));
+    cursor.classList.toggle("is-action", Boolean(event.target.closest("a,button,summary")));
   });
   document.documentElement.addEventListener("mouseleave", () => cursor.classList.remove("show"));
 } else if (cursor) {

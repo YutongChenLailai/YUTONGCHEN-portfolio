@@ -3,7 +3,7 @@
 .about-page p, .about-page h1, .about-page h2, .about-page dl { margin: 0; }
 .about-page strong { font-weight: 600; }
 .about-page a { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .15em; }
-.about-page a:hover, .about-page a:focus-visible { background: transparent; text-decoration-thickness: 2px; }
+.about-page a:hover, .about-page a:focus-visible { background: transparent; text-decoration-thickness: 1px; }
 .about-identity { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 24px clamp(30px,4.4vw,56px); margin-bottom: 44px; }
 .about-name h1 { font-size: inherit; font-weight: 600; line-height: inherit; letter-spacing: inherit; }
 .about-name h1 span { color: #727272; font-size: .86em; font-weight: 400; }
@@ -66,7 +66,7 @@
 .profile-photo{display:block;width:100px!important;height:125px!important;object-fit:contain;background:#fff;flex:none}
 @media(prefers-reduced-motion:reduce){.award-certificate summary,.disclosure-arrow{transition:none}}
 
-.award-certificate summary:hover,.award-certificate summary:focus-visible{background:transparent;color:#111;font-weight:500}
+.award-certificate summary:hover,.award-certificate summary:focus-visible{background:transparent;color:#111}
 .about-name{display:flex;align-items:flex-start;gap:20px;min-width:0}
 .profile-name-copy{min-width:0}
 .about-biography{grid-template-columns:minmax(0,1fr);max-width:920px}
@@ -85,11 +85,9 @@
 .about-contact{gap:0}.about-contact>div{grid-template-columns:minmax(160px,43%) minmax(0,1fr);gap:20px;padding:10px 0;border-top:1px solid #e7e7e7;align-items:center}
 .about-contact dt{font-size:14px;line-height:1.35;color:#666}.about-contact dt span{display:block;margin-top:3px;font-size:12px;color:#888}
 .about-contact dd{font-size:17px;line-height:1.4}
-.about-page a{transition:color 160ms ease,text-decoration-thickness 160ms ease}
-.about-page a:hover,.about-page a:focus-visible{background:transparent;color:#111;font-weight:500}
+.about-page a{transition:color 160ms ease}
+.about-page a:hover,.about-page a:focus-visible{background:transparent;color:#111}
 .award-certificate summary{border-radius:0;transition:color 160ms ease}
-.award-certificate summary:hover .disclosure-arrow{transform:translateY(2px)}
-.award-certificate[open] summary:hover .disclosure-arrow{transform:rotate(180deg) translateY(2px)}
 @media(max-width:850px){.about-identity{grid-template-columns:1fr;gap:30px}.about-contact>div{grid-template-columns:minmax(140px,38%) minmax(0,1fr)}}
 @media(max-width:480px){.about-contact>div{grid-template-columns:1fr;gap:6px;padding:12px 0}.about-contact dt span{display:inline;margin-left:8px}.about-contact dd{font-size:17px}}
 
@@ -107,3 +105,5 @@
 @media(min-width:851px) and (max-width:1050px){.about-identity{grid-template-columns:1fr}.about-name .profile-photo{width:192px!important;height:240px!important}}
 @media(max-width:850px){.about-name .profile-photo{width:160px!important;height:200px!important}}
 @media(max-width:480px){.about-name .profile-photo{width:128px!important;height:160px!important}}
+
+.about-body .cursor.is-action{width:28px;height:28px;margin:-14px 0 0 -14px;background:#ffff18;mix-blend-mode:multiply}
