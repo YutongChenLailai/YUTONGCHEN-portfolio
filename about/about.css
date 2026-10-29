@@ -146,3 +146,4 @@
 }
 @media(prefers-reduced-motion:reduce){.award-certificate>a,.award-certificate>.education-documents{animation:none!important}}
 @media(min-width:851px){.about-name .profile-photo{align-self:end}}
+@media(min-width:851px){.about-name .profile-photo{width:208px!important;height:260px!important}}
