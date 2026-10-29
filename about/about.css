@@ -118,3 +118,17 @@
 .about-identity>.about-biography-section>h2{border-top:0;padding-top:0}
 .about-identity .about-biography{line-height:1.45}
 @media(min-width:1051px){.about-identity{grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:40px;align-items:start}}
+
+/* One text axis from the name through the biography; hover reveals evidence. */
+.about-identity{grid-template-columns:1fr}
+.about-profile,.about-name{height:auto}
+.about-name{display:grid;grid-template-columns:272px minmax(0,1fr);gap:24px;align-items:start}
+.profile-name-copy .about-biography-section{margin-top:22px}
+.profile-name-copy .about-biography-section>h2{border-top:0;padding-top:0;margin-bottom:12px}
+.profile-name-copy .about-biography{max-width:none;line-height:1.45}
+.award-certificate summary{padding:6px 0;list-style:none}
+.award-certificate summary::after{content:none}
+@media(max-width:850px){.about-name{grid-template-columns:160px minmax(0,1fr)}}
+@media(max-width:600px){.about-name{display:block}.about-name .profile-photo{width:128px!important;height:160px!important;margin-bottom:20px}.profile-name-copy .about-biography-section{margin-top:24px}}
+@media(min-width:851px){.about-row,.about-contact-section .about-contact>div{grid-template-columns:272px minmax(0,1fr);gap:24px}}
+@media(min-width:601px) and (max-width:850px){.about-row,.about-contact-section .about-contact>div{grid-template-columns:160px minmax(0,1fr);gap:24px}}

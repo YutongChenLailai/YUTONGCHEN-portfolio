@@ -15,13 +15,19 @@ const projects = [
   ["The Forbidden Hue", "forbidden-hue", "Heritage through virtual play.", "VR game · heritage · narrative", "2023", "Heritage · narrative", ["Art", "Design"]]
 ];
 window.portfolioProjects = projects;
+const manuscriptSlugs = new Set(["community-feedback-vibe-coding", "sketches-as-previews"]);
+const projectDestination = (title, slug, detailUrl) => manuscriptSlugs.has(slug)
+  ? `https://scholar.google.com/scholar?q=${encodeURIComponent('"' + title + '"')}`
+  : detailUrl;
+window.projectDestination = projectDestination;
+
 
 const grid = document.querySelector(".work-grid");
 if (grid) {
   projects.forEach(([title, slug, copy, medium, year], index) => {
     const card = document.createElement("a");
     card.className = `project project-${index + 1}${slug === "sketches-as-previews" ? " project--contained" : ""}`;
-    card.href = detailBase + slug;
+    card.href = projectDestination(title, slug, detailBase + slug);
     const extension = slug === "closet-x" || slug === "drown-in-algae" ? "jpg" : "webp";
     const imageName = slug === "community-feedback-vibe-coding" ? "community-feedback-vibe-coding-20261022.webp" : `${slug}.${extension}`;
     card.innerHTML = `<img src="assets/projects/${imageName}?v=white-covers-20261027" alt="${title}" loading="${index < 3 ? "eager" : "lazy"}"><span class="meta"><strong>${title}</strong><span class="description">${copy}</span><span class="category">${medium}</span><span class="year">${year}</span></span>`;
@@ -108,4 +114,23 @@ if (cursor && matchMedia("(pointer:fine)").matches) {
   };
   addEventListener("touchend", releaseTouch, {passive:true});
   addEventListener("touchcancel", releaseTouch, {passive:true});
+}
+
+// Mouse users preview certificates on hover; native tap and keyboard toggles remain available.
+for (const details of document.querySelectorAll('.award-certificate')) {
+  details.addEventListener('pointerenter', event => {
+    if (event.pointerType === 'mouse') details.open = true;
+  });
+  details.addEventListener('pointerleave', event => {
+    if (event.pointerType === 'mouse') details.open = false;
+  });
+  details.addEventListener('focusin', event => {
+    if (event.target.matches(':focus-visible')) details.open = true;
+  });
+  details.addEventListener('focusout', event => {
+    if (!details.contains(event.relatedTarget)) details.open = false;
+  });
+  details.querySelector('summary').addEventListener('click', event => {
+    if (event.pointerType === 'mouse') event.preventDefault();
+  });
 }

@@ -16,7 +16,7 @@ const projectKeywords = {
 const workProjects = window.portfolioProjects.map(([title, slug, description, format, year, focus, categories]) => ({
   title, slug, description, format, year, focus, categories, keyword: projectKeywords[slug] || focus || format,
   image: `../assets/projects/${slug}.${slug === "closet-x" || slug === "drown-in-algae" ? "jpg" : "webp"}?v=white-covers-20261027`,
-  url: `../project/?id=${slug}`
+  url: window.projectDestination(title, slug, `../project/?id=${slug}`)
 }));
 const filters = document.querySelector("#work-filters");
 const table = document.querySelector("#work-table");
