@@ -20,7 +20,7 @@ const videos = {
   "feeding-fear": [["bo7ichlhwmQ","Project film / 项目影像"]]
 };
 const portfolioCounts = {"poopslaves":6,"plantievers-illusion":4,"value-machine":5,"fetorium":5,"plated-fantasies":4};
-const heroOverrides = {"closet-x":"../assets/details/closet-x/gallery/outcome-01.jpg","community-feedback-vibe-coding":"../assets/details/community-feedback-vibe-coding/cover/cover-20261022.webp"};
+const heroOverrides = {"vivid":"../assets/projects/vivid-cover-20261105.png","closet-x":"../assets/details/closet-x/gallery/outcome-01.jpg","community-feedback-vibe-coding":"../assets/details/community-feedback-vibe-coding/cover/cover-20261022.webp"};
 const projectCopy = {
   "community-feedback-vibe-coding": ["CoVibe investigates how community feedback can enter AI-mediated application iteration through bounded selection, revision, and version history.", "CoVibe 研究社区反馈如何通过受约束的筛选、AI 辅助修订与版本历史进入应用迭代过程。"],
   "sketches-as-previews": ["A study of how people compress moving video into four-panel storyboard previews, and how peer evaluation helps them revise visual representations for clarity, meaning, and distinctiveness.", "一项研究人们如何把动态视频压缩为四格故事板预览，以及同伴评估如何帮助创作者提升视觉表征的清晰度、意义与辨识度。"],
