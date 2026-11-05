@@ -1003,7 +1003,7 @@ window.portfolioDetails = {
   "drown-in-algae": {
     "sections": [
       {
-        "links": [],
+        "links": [{"href": "https://ais.hkust.edu.hk/whats-happening/news/innobay-summer-camp-2025-turning-marine-innovation-action-greater-bay-area", "text": "HKUST InnoBay 2025 · Official camp report / 港科大官方报道"}],
         "paragraphs": [
           {
             "heading": false,
