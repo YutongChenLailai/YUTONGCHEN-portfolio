@@ -23,7 +23,7 @@ window.portfolioDetails = {
           {
             "heading": false,
             "lang": null,
-            "text": "Manuscript under review for ACM CHI 2027 / ACM CHI 2027 审稿中"
+            "text": "Research manuscript / 研究手稿"
           }
         ],
         "title": "Paper & people"
@@ -130,12 +130,12 @@ window.portfolioDetails = {
           {
             "heading": false,
             "lang": null,
-            "text": "R. Shi, T. Zhu, Y. Chen, F. Zhang, Q. Wu, H. Li. How Community Feedback Affects Vibe Coding Creative Processes. Manuscript under review for ACM CHI 2027."
+            "text": "R. Shi, T. Zhu, Y. Chen, F. Zhang, Q. Wu, H. Li. How Community Feedback Affects Vibe Coding Creative Processes. Research manuscript."
           },
           {
             "heading": false,
             "lang": "zh-CN",
-            "text": "在审手稿；尚非已录用或已发表论文。"
+            "text": "研究手稿；尚非已录用或已发表论文。"
           }
         ],
         "title": "Citation"
@@ -166,7 +166,7 @@ window.portfolioDetails = {
           {
             "heading": false,
             "lang": null,
-            "text": "Manuscript under review for ACM CHI 2027 / ACM CHI 2027 审稿中"
+            "text": "Research manuscript / 研究手稿"
           }
         ],
         "title": "Paper & people"
@@ -273,12 +273,12 @@ window.portfolioDetails = {
           {
             "heading": false,
             "lang": null,
-            "text": "J. Huang, Y. Chen, S. Sun, R. Yu, RAY LC. Sketches as Previews: How Humans Sketch Visual Representations for Videos. Manuscript under review for ACM CHI 2027."
+            "text": "J. Huang, Y. Chen, S. Sun, R. Yu, RAY LC. Sketches as Previews: How Humans Sketch Visual Representations for Videos. Research manuscript."
           },
           {
             "heading": false,
             "lang": "zh-CN",
-            "text": "在审手稿；尚非已录用或已发表论文。"
+            "text": "研究手稿；尚非已录用或已发表论文。"
           }
         ],
         "title": "Citation"
